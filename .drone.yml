@@ -1,0 +1,46 @@
+pipeline:
+  restore-cache:
+    image: drillster/drone-volume-cache
+    restore: true
+    mount:
+    - ./node_modules
+    volumes:
+    - /tmp/cache:/cache
+
+  install:
+    image: node:10.13.0-alpine
+    commands:
+    - yarn
+
+  build:
+    image: node:10.13.0-alpine
+    commands:
+      - yarn run build
+
+  rebuild-cache:
+    image: drillster/drone-volume-cache
+    rebuild: true
+    mount:
+    - ./node_modules
+    volumes:
+    - /tmp/cache:/cache
+
+  deploy-dev:
+    image: plugins/s3
+    bucket: dev.nvent.nl
+    region: eu-central-1
+    source: dist/**/*
+    target: /
+    strip_prefix: dist/
+    when:
+      branch: dev
+
+  deploy-prod:
+    image: plugins/s3
+    bucket: nvent.nl
+    region: eu-central-1
+    source: dist/**/*
+    target: /
+    strip_prefix: dist/
+    when:
+      branch: master
