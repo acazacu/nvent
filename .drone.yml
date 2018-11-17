@@ -27,20 +27,21 @@ pipeline:
 
   deploy-dev:
     image: plugins/s3-sync
-    bucket: dev.nvent.nl
     region: eu-central-1
     source: dist/
+    bucket: dev.nvent.nl
     target: /
     delete: true
     when:
-      branch: dev
+      branch: develop
 
   deploy-prod:
     image: plugins/s3-sync
-    bucket: nvent.nl
     region: eu-central-1
     source: dist/
+    bucket: nvent.nl
     target: /
     delete: true
     when:
       branch: master
+branches: [ master, develop ]
