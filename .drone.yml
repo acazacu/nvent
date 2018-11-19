@@ -33,7 +33,7 @@ pipeline:
     target: /
     strip_prefix: dist/
     when:
-      branch: dev
+      branch: develop
 
   deploy-prod:
     image: plugins/s3
@@ -44,3 +44,4 @@ pipeline:
     strip_prefix: dist/
     when:
       branch: master
+branches: [ master, develop ]
