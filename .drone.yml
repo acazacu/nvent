@@ -7,21 +7,21 @@ pipeline:
     volumes:
     - /tmp/cache:/cache
     when:
-      event: [ tag ]
+      event: tag
 
   install:
     image: node:10.13.0-alpine
     commands:
     - yarn
     when:
-      event: [ push, tag ]
+      event: tag
 
   build:
     image: node:10.13.0-alpine
     commands:
       - yarn run build
     when:
-      event: [ push, tag ]
+      event: push
 
   rebuild-cache:
     image: drillster/drone-volume-cache
@@ -31,7 +31,7 @@ pipeline:
     volumes:
     - /tmp/cache:/cache
     when:
-      event: [ push, tag ]
+      event: push
 
   deploy-dev:
     image: acazacu/drone-plugin-s3-sync:4
@@ -42,6 +42,8 @@ pipeline:
     delete: true
     when:
       event: [ push, tag ]
+      branch:
+        exclude: master
 
   deploy-prod:
     image: acazacu/drone-plugin-s3-sync:4
@@ -52,4 +54,4 @@ pipeline:
     delete: true
     when:
       branch: master
-      event: [ tag ]
+      event: tag
