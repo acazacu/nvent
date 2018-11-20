@@ -39,7 +39,7 @@ pipeline:
     image: plugins/s3
     bucket: nvent.nl
     region: eu-central-1
-    source: dist/**/*
+    source: /dist/**/*
     target: /
     strip_prefix: dist/
     when:
