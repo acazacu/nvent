@@ -29,7 +29,7 @@ pipeline:
     image: acazacu/drone-plugin-s3-sync:4
     bucket: dev.nvent.nl
     region: eu-central-1
-    source: dist/**/*
+    source: /dist/**/*
     target: /
     delete: true
     when:
