@@ -26,7 +26,7 @@ pipeline:
     - /tmp/cache:/cache
 
   deploy-dev:
-    image: acazacu/drone-plugin-s3-sync:2
+    image: acazacu/drone-plugin-s3-sync:3
     bucket: dev.nvent.nl
     region: eu-central-1
     source: dist/**/*
