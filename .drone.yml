@@ -41,7 +41,7 @@ pipeline:
     target: /
     delete: true
     when:
-      event: [ push, tag ]
+      event: push
       branch:
         exclude: master
 
