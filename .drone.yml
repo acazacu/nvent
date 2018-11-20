@@ -6,16 +6,22 @@ pipeline:
     - ./node_modules
     volumes:
     - /tmp/cache:/cache
+    when:
+      event: [ tag ]
 
   install:
     image: node:10.13.0-alpine
     commands:
     - yarn
+    when:
+      event: [ push, tag ]
 
   build:
     image: node:10.13.0-alpine
     commands:
       - yarn run build
+    when:
+      event: [ push, tag ]
 
   rebuild-cache:
     image: drillster/drone-volume-cache
@@ -24,6 +30,8 @@ pipeline:
     - ./node_modules
     volumes:
     - /tmp/cache:/cache
+    when:
+      event: [ push, tag ]
 
   deploy-dev:
     image: acazacu/drone-plugin-s3-sync:4
@@ -33,15 +41,15 @@ pipeline:
     target: /
     delete: true
     when:
-      branch: develop
+      event: [ push, tag ]
 
   deploy-prod:
-    image: plugins/s3
+    image: acazacu/drone-plugin-s3-sync:4
     bucket: nvent.nl
     region: eu-central-1
-    source: /dist/**/*
+    source: dist
     target: /
-    strip_prefix: dist/
+    delete: true
     when:
       branch: master
-branches: [ master, develop ]
+      event: [ tag ]
