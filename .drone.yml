@@ -16,13 +16,10 @@ pipeline:
     when:
       event: push
 
-  _build: &build-default
+  build-dev:
     image: node:10.13.0-alpine
     commands:
-      - yarn run build
-
-  build-dev:
-    <<: *build-default
+      - yarn run build --mode=development
     environment:
       NODE_ENV: "development"
     when:
@@ -31,7 +28,9 @@ pipeline:
         exclude: master
 
   build-prod:
-    <<: *build-default
+    image: node:10.13.0-alpine
+    commands:
+      - yarn run build --mode=production
     environment:
       NODE_ENV: "production"
     when:
