@@ -14,10 +14,7 @@
             If you're interested in how I work, <a href="https://github.com/acazacu/nvent" title="github.com/acazacu/nvent" target="_blank">check out the github repo</a> that runs this website.
         </p>
         <p>
-            About this website, it is <a href="http://vue.js" title="vuejs" target="_blank">a vuejs app</a> running in your browser and talking to serverless architecture deployed into AWS.
-        </p>
-        <p>
-            Not to brag, it was distributed to you by Cloudfront after having been deployed to S3 via a private CD pipeline.
+            About this website, it is <a href="http://vue.js" title="vuejs" target="_blank">a vuejs app</a> running in your browser and talking to an AWS <a href="https://aws.amazon.com/serverless/" title="What is serverless?" target="_blank">serverless architecture</a>.
             More on that, in the github repo.
         </p>
     </article>
