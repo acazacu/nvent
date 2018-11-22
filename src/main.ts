@@ -11,6 +11,6 @@ new Vue({
   render: (h) => h(App),
 }).$mount('main');
 
-if (process.env.VUE_CLI_CONFIG_MODE === 'development') {
+if (process.env.VUE_APP_CLI_MODE === 'development') {
     Vue.config.devtools = true;
 }
