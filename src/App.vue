@@ -9,10 +9,30 @@
 <style scoped lang="scss">
   main {
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: stretch;
+    justify-content: space-between;
+    font-family: 'Muli', sans-serif;
+
+    > header {
+      margin: 8px 16px 0 16px;
+    }
+
+    > article {
+      margin: 16px;
+    }
+
+    > footer {
+      margin: 0 16px 8px 16px;
+    }
+
+    @media screen and (min-width: 1024px) {
+      align-items: center;
+      margin: auto;
+      width: 800px;
+    }
   }
 </style>
 <script lang="ts">
@@ -27,5 +47,4 @@
         },
     })
     export default class App extends Vue { }
-
 </script>
