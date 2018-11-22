@@ -4,7 +4,13 @@ module.exports = {
     baseUrl: process.env.VUE_CONFIG_BASE_URL,
     productionSourceMap: process.env.VUE_CONFIG_PRODUCTION_SOURCE_MAP === 'true',
     css: {
+        // modules: true,
         extract: process.env.VUE_CONFIG_CSS_EXTRACT === 'true',
         sourceMap: process.env.VUE_CONFIG_CSS_SOURCE_MAP === 'true'
+        // loaderOptions: {
+        //     css: {
+        //         localIdentName: '[local]_[hash:base64:8]'
+        //     }
+        // }
     }
 };
