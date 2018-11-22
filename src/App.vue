@@ -1,14 +1,31 @@
 <template>
   <main>
-    <div id="header">
-      <h1><router-link to="/" exact>nvent</router-link></h1>
-    </div>
+    <header-component></header-component>
     <router-view/>
-    <div id="footer">
-      <p>v.{{ version }}</p>
-    </div>
+    <footer-component></footer-component>
   </main>
 </template>
 
-<style src="./app.css"></style>
-<script lang="ts" src="./App.ts"></script>
+<style scoped lang="scss">
+  main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+<script lang="ts">
+    import { Component, Vue } from 'vue-property-decorator';
+    import HeaderComponent from '@/component/Header.vue';
+    import FooterComponent from '@/component/Footer.vue';
+
+    @Component({
+        components: {
+            'header-component': HeaderComponent,
+            'footer-component': FooterComponent,
+        },
+    })
+    export default class App extends Vue { }
+
+</script>
