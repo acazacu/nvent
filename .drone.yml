@@ -16,12 +16,22 @@ pipeline:
     when:
       event: push
 
-  build:
+  build-dev:
     image: node:10.13.0-alpine
     commands:
-      - yarn run build
+      - yarn run build --mode=development
     when:
       event: push
+      branch:
+        exclude: master
+
+  build-prod:
+    image: node:10.13.0-alpine
+    commands:
+      - yarn run build --mode=production
+    when:
+      event: push
+      branch: master
 
   rebuild-cache:
     image: drillster/drone-volume-cache
