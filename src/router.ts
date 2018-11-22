@@ -5,13 +5,14 @@ import Home from './views/Home.vue';
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  mode: process.env.VUE_APP_ROUTER_MODE,
   base: process.env.BASE_URL,
   routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home,
-    },
+      {
+          path: '/',
+          alias: '/home',
+          name: 'home',
+          component: Home,
+      },
   ],
 });
