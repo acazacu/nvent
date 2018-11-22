@@ -1,13 +1,8 @@
 <template>
   <main>
     <div id="header">
-      <h1><router-link to="/">nvent</router-link></h1>
+      <h1><router-link to="/" exact>nvent</router-link></h1>
     </div>
-    <nav>
-      <ol>
-        <li><router-link to="/about">about</router-link></li>
-      </ol>
-    </nav>
     <router-view/>
     <div id="footer">
       <p>v.{{ version }}</p>
