@@ -5,4 +5,4 @@ import { Component, Vue } from 'vue-property-decorator';
         version: () => process.env.VUE_APP_VERSION,
     },
 })
-export default class Home extends Vue { }
+export default class App extends Vue { }
