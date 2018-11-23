@@ -11,9 +11,10 @@ You can see the code in the repo and here's how the pipeline that I set up in AW
 - it has a NAT Gateway that enables the builder to talk to this repo 
 - it sets up an OpenVPN server that allows me connect to the AWS VPC to access the private resources and domains
 - it sets up a [Drone CI](https://drone.io) pipeline to consume this repo's [Git Flow](https://guides.github.com/introduction/flow/). The pipeline:
-    - deploys tagged releases made in this repo to master, into production env: S3 via Cloudfront, publicly accessible 
-    - deploys all feature branch pushes made in this repo into the dev environment: S3, privately accessible     
+- deploys tagged releases made in this repo to master into production env via Drone: S3 via Cloudfront, publicly accessible 
+- deploys all feature branch pushes made in this repo into the dev environmentvia Drone : S3, privately accessible     
 
+This setup is all custom, I didn't use AWS's service stack for NAT, VPN, code building and deploying.
 
 Why Vue? A client asked me about it, so I set this up as a demo for them. Otherwise, for a mostly static website
 like this one, plain HTML would do the trick :)
