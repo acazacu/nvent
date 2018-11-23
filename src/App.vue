@@ -9,16 +9,37 @@
 <style scoped lang="scss">
   main {
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: stretch;
+    justify-content: space-between;
+    font-family: 'Muli', sans-serif;
+
+    > header {
+      margin: 8px 16px 0 16px;
+    }
+
+    > article {
+      margin: 16px;
+    }
+
+    > footer {
+      margin: 0 16px 8px 16px;
+    }
+
+    @media screen and (min-width: 1024px) {
+      align-items: center;
+      justify-content: space-around;
+      margin: auto;
+      width: 640px;
+    }
   }
 </style>
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
-    import HeaderComponent from '@/component/Header.vue';
-    import FooterComponent from '@/component/Footer.vue';
+    import FooterComponent from '@/components/FooterComponent.vue';
+    import HeaderComponent from '@/components/HeaderComponent.vue';
 
     @Component({
         components: {
@@ -27,5 +48,4 @@
         },
     })
     export default class App extends Vue { }
-
 </script>

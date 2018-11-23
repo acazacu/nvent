@@ -5,8 +5,8 @@
 </template>
 <style scoped lang="scss">
     h1 {
+        font-size: 24px;
         font-weight: normal;
-        font-size: 0.9em;
         letter-spacing: 1px;
     }
     a {
@@ -14,6 +14,15 @@
         color: #333333;
         cursor: default;
         user-select: none;
+
+        &:not(.router-link-active) {
+            cursor: pointer;
+            text-decoration: underline;
+
+            &:hover {
+                color: blue;
+            }
+        }
     }
 </style>
 <script lang="ts">
