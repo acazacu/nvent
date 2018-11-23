@@ -38,8 +38,8 @@
 </style>
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
-    import HeaderComponent from '@/component/Header.vue';
-    import FooterComponent from '@/component/Footer.vue';
+    import FooterComponent from '@/components/FooterComponent.vue';
+    import HeaderComponent from '@/components/HeaderComponent';
 
     @Component({
         components: {
