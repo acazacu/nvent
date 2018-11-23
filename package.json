@@ -35,7 +35,8 @@
     "type": "git",
     "url": "git+https://github.com/acazacu/nvent.git"
   },
-  "author": "Alex Cazacu",
+  "author": "Nvent / Alex Cazacu",
+  "license" : "MIT",
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
