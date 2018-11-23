@@ -1,6 +1,6 @@
 {
   "name": "nvent",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "nvent.nl",
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -36,7 +36,7 @@
     "url": "git+https://github.com/acazacu/nvent.git"
   },
   "author": "Nvent / Alex Cazacu",
-  "license" : "MIT",
+  "license": "MIT",
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
