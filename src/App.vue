@@ -30,8 +30,9 @@
 
     @media screen and (min-width: 1024px) {
       align-items: center;
+      justify-content: space-around;
       margin: auto;
-      width: 800px;
+      width: 640px;
     }
   }
 </style>
