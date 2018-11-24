@@ -1,22 +1,22 @@
 ## About this website
-The project is a very simple [vue.js](https://vuejs.org) app created via [vue-cli](https://cli.vuejs.org/). I started working on it while training for the AWS Solutions Architect certificate, while deciding to take an exercise one step further by building a [serverless website](https://aws.amazon.com/serverless/) with a [Drone CI](https://drone.io) pipeline to handle its deployments. This work in this repo was done using [Git Flow](https://guides.github.com/introduction/flow/).
+The project is a very simple [vue.js](https://vuejs.org) app created via [vue-cli](https://cli.vuejs.org/). I started working on it while training for the AWS Solutions Architect certificate, while deciding to take an exercise one step further by building a [serverless website](https://aws.amazon.com/serverless/) and then automating its deployment with [Drone CI](https://drone.io). This work in this repo was done using [Git Flow](https://guides.github.com/introduction/flow/).
 
-There are two parts to this project, the code that you can see in this repo and the CI / CD pipeline set up in AWS.
+If it helps you to know how you should look at all this, here's a list of things that this repo is:
+- an excercise for the AWS SAA certification
+- a demo for whoever is interested in how I work
+- my website (don't take this too seriously)
 
-About the code, it is a vue.js SPA. I went with vue.js as a spike, a client asked me about it and I gave it a go as part of this project. So, this is also a demo.
+Now, about the code you see here, it is a [vue.js](https://vuejs.org) single page app. I went with vue.js as a spike, a client asked me about it around the time that I started working on this, so I gave it a go as part of this project. Hopefully, I'll get more creative and add something other than a 3 word homepage to it :-). In time....
 
-The pipeline that I set up in AWS handles deploys to production and development. Production is an S3 bucket delivered publicly via Cloudfront. Development is a privately accessible (VPN only) S3 Bucket. Deployments are made in the following manner:
+The pipeline that I set up in AWS handles deploys this repo to two environments, production and development. Production is an S3 bucket delivered publicly via Cloudfront and development is a privately accessible (VPN only) S3 Bucket. Deployments are made in the following manner:
 - on every tagged release to master, a deployment is made to production
-- on every code push to feature branches, a deployment is made to development, 
+- on every code push to feature branches, a deployment is made to development
 
-Setting this pipeline up had me:
-- set up a bastion instance
-- set up an openvpn server
-- set up a nat gateway for the private instances web access
-- set up an ECS deployment for the DroneCI builder with persistance to AWS's RDS
-- making all of this into templates, so that I can easily manage and replicate it
+This is outlined in the .drone.yml file, present in this repo.
 
-Some of these services are provided by AWS as well, however, they come at a cost. This definitely took a lot more time to set up, but it's a lot cheaper to run and it made me wiser. Hopefully :)
+If you want to know more about the pipeline itself and how that is set up, I'm not making any promises, but I'm looking into writing some guides on that in the near future. Originally, I went with using OOTB AWS services, but, it turns out that these services incur some extra costs that you can skip by going custom. Not to mention that skipping them forces your hand to learn a thing or two. So, if you want do get your hands dirty, you can:
+- setup an OpenVPN server to access your private resources, instead of using a Amazon's VPN specific services (Customer Gateways, VPGs and VPN Connections)
+- setup a NAT instance on a normal linux AMI, instead of Amazon's NAT Gateway
 
 #### Setup
 ```
