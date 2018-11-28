@@ -1,15 +1,15 @@
 <template>
-    <footer>
-        <p>v.{{ version }}</p>
-    </footer>
+  <footer>
+    <p>v.{{ version }}</p>
+  </footer>
 </template>
 <style scoped lang="scss">
-    p {
-        font-size: 0.6em;
-        color: #666666;
-        cursor: default;
-        font-weight: normal;
-    }
+  p {
+    font-size: 0.6em;
+    color: #666666;
+    cursor: default;
+    font-weight: normal;
+  }
 </style>
 <script>
 export default {
