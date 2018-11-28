@@ -36,16 +36,15 @@
     }
   }
 </style>
-<script lang="ts">
-    import { Component, Vue } from 'vue-property-decorator';
-    import FooterComponent from '@/components/FooterComponent.vue';
-    import HeaderComponent from '@/components/HeaderComponent.vue';
+<script>
+import HeaderComponent from './components/HeaderComponent.vue';
+import FooterComponent from './components/FooterComponent.vue';
 
-    @Component({
-        components: {
-            'header-component': HeaderComponent,
-            'footer-component': FooterComponent,
-        },
-    })
-    export default class App extends Vue { }
+export default {
+  name: 'App',
+  components: {
+    'header-component': HeaderComponent,
+    'footer-component': FooterComponent,
+  },
+};
 </script>

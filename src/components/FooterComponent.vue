@@ -11,13 +11,10 @@
         font-weight: normal;
     }
 </style>
-<script lang="ts">
-    import { Component, Vue } from 'vue-property-decorator';
-
-    @Component({
-        computed: {
-            version: () => process.env.VUE_APP_VERSION,
-        },
-    })
-    export default class FooterComponent extends Vue { }
+<script>
+export default {
+  computed: {
+    version: () => process.env.VUE_APP_VERSION,
+  },
+};
 </script>
