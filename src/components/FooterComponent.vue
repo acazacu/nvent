@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <p>v.{{ version }}</p>
+    <p>v.{{ version }} 🤯</p>
   </footer>
 </template>
 <style scoped lang="scss">

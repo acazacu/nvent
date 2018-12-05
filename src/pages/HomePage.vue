@@ -3,7 +3,7 @@
     <header>
       <h2>Hi stranger,</h2>
     </header>
-    <p>I'm Alex, a techie working in and around Amsterdam and this is my website. v.{{ version }} 🤯</p>
+    <p>I'm Alex, a techie working in and around Amsterdam and this is my website.</p>
   </article>
 </template>
 <style scoped lang="scss">
@@ -21,12 +21,3 @@
     font-size: 12px;
   }
 </style>
-<script>
-  import { mapState } from 'vuex';
-
-  export default {
-    computed: {
-      ...mapState([ 'version' ])
-    },
-  };
-</script>
