@@ -5,12 +5,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-
-  },
-  mutations: {
-
-  },
-  actions: {
-
+    version: process.env.VUE_APP_VERSION,
   },
 });

@@ -8,11 +8,11 @@ export default new Router({
   mode: process.env.VUE_APP_ROUTER_MODE,
   base: process.env.BASE_URL,
   routes: [
-      {
-          path: '/',
-          alias: '/home',
-          name: 'home',
-          component: HomePage,
-      },
+    {
+      path: '/',
+      alias: '/home',
+      name: 'home',
+      component: HomePage,
+    },
   ],
 });
