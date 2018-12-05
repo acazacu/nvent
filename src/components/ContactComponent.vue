@@ -1,5 +1,5 @@
 <template>
-  <form v-on:submit.prevent="onMessageFormSubmit">
+  <form v-on:submit.prevent="onSubmit">
     <div class="form-item">
       <input :value="message.name" @input="updateName" placeholder="Name...">
     </div>
@@ -44,7 +44,7 @@
   }
 </style>
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   computed: {
@@ -53,6 +53,9 @@ export default {
     }),
   },
   methods: {
+    ...mapActions({
+      submit: 'contact/sendMessage'
+    }),
     updateName(e) {
       this.$store.commit('contact/updateMessage', { name: e.target.value });
     },
@@ -65,8 +68,8 @@ export default {
     updateMessage(e) {
       this.$store.commit('contact/updateMessage', { message: e.target.value });
     },
-    onMessageFormSubmit() {
-      console.log('aaa');
+    onSubmit() {
+      this.submit();
     },
   },
 };
