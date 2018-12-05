@@ -12,9 +12,11 @@
   }
 </style>
 <script>
-export default {
-  computed: {
-    version: () => process.env.VUE_APP_VERSION,
-  },
-};
+  import { mapState } from 'vuex';
+
+  export default {
+    computed: {
+      ...mapState([ 'version' ])
+    },
+  };
 </script>
