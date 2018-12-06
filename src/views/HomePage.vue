@@ -4,7 +4,7 @@
       <h2>Hi stranger,</h2>
     </header>
     <p>I'm Alex, a techie working in and around Amsterdam and this is my website.</p>
-    <p><router-link to="/contact">Contact me.</router-link></p>
+    <p><router-link :to="{ name: 'contact-form' }">Contact me.</router-link></p>
   </article>
 </template>
 <style scoped lang="scss">

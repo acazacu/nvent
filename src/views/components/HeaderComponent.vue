@@ -1,7 +1,7 @@
 <template>
   <header>
     <h1>
-      <router-link exact to="/">nvent</router-link>
+      <router-link exact to="/">{{ siteName }}</router-link>
     </h1>
   </header>
 </template>
@@ -28,3 +28,12 @@
     }
   }
 </style>
+<script>
+  export default {
+    data() {
+      return {
+        siteName: 'nvent'
+      }
+    }
+  }
+</script>
