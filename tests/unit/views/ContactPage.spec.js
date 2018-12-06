@@ -1,19 +1,19 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import VueRouter from "vue-router";
-import ContactSuccessComponent from '../../src/views/components/ContactSuccessComponent.vue';
+import ContactPage from '../../../src/views/ContactPage.vue';
 
 const localVue = createLocalVue();
 localVue.use(VueRouter);
 
 let router;
 
-describe('ContactSuccessComponent', () => {
+describe('ContactPage', () => {
   beforeEach(() => {
     router = new VueRouter({});
   });
 
   it('creates', () => {
-    const wrapper = mount(ContactSuccessComponent, { localVue, router });
+    const wrapper = mount(ContactPage, { localVue, router });
     expect(wrapper.isVueInstance()).toBeTruthy();
   });
 });

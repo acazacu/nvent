@@ -1,6 +1,6 @@
 import Vuex from "vuex";
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import FooterComponent from '../../src/views/components/FooterComponent.vue';
+import FooterComponent from '../../../../src/views/components/FooterComponent.vue';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);

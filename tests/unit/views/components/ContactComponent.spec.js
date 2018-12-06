@@ -1,6 +1,6 @@
 import Vuex from "vuex";
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import ContactComponent from '../../src/views/components/ContactComponent.vue';
+import ContactComponent from '../../../../src/views/components/ContactComponent.vue';
 import flushPromises from "flush-promises";
 
 const localVue = createLocalVue();
