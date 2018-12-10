@@ -1,5 +1,5 @@
 import Vuex from "vuex";
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import ContactComponent from '../../../src/components/ContactComponent.vue';
 import flushPromises from "flush-promises";
 
@@ -21,7 +21,7 @@ const mockFactory = mocks => ({
 
 describe('ContactComponent', () => {
   it('creates', () => {
-    const wrapper = shallowMount(ContactComponent, {
+    const wrapper = mount(ContactComponent, {
       localVue,
       store: storeFactory(null),
     });
@@ -31,7 +31,7 @@ describe('ContactComponent', () => {
   it('passes the user input to the store on form submit', () => {
     const sendMessageSpy = jest.fn();
 
-    const wrapper = shallowMount(ContactComponent, {
+    const wrapper = mount(ContactComponent, {
       localVue,
       store: storeFactory({
         sendMessage: sendMessageSpy
@@ -62,7 +62,7 @@ describe('ContactComponent', () => {
   it('redirects to contact-success on a successful submit', async () => {
     const sendMessageSpy = jest.fn().mockReturnValue(Promise.resolve());
     const pushSpy = jest.fn();
-    const wrapper = shallowMount(ContactComponent, {
+    const wrapper = mount(ContactComponent, {
       localVue,
       store: storeFactory({
         sendMessage: sendMessageSpy
@@ -85,7 +85,7 @@ describe('ContactComponent', () => {
   it('redirects to contact-error on a failed submit', async () => {
     const sendMessageSpy = jest.fn().mockReturnValue(Promise.reject());
     const pushSpy = jest.fn();
-    const wrapper = shallowMount(ContactComponent, {
+    const wrapper = mount(ContactComponent, {
       localVue,
       store: storeFactory({
         sendMessage: sendMessageSpy
