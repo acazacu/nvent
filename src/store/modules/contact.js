@@ -1,10 +1,11 @@
 import { post } from '../http';
+
 export default {
   namespaced: true,
   actions: {
-    async sendMessage() {
+    async sendMessage({ rootState }, message) {
       try {
-        await post('http://localhost:8080', { test: 1 });
+        await post(`${rootState.baseUrlApi}/contact`, message);
       } catch (error) {
         throw error;
       }

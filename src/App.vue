@@ -29,7 +29,7 @@
     }
 
     @media screen and (min-width: 1024px) {
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-around;
       margin: auto;
       width: 640px;
@@ -37,8 +37,8 @@
   }
 </style>
 <script>
-import HeaderComponent from './views/components/HeaderComponent.vue';
-import FooterComponent from './views/components/FooterComponent.vue';
+import HeaderComponent from './components/HeaderComponent.vue';
+import FooterComponent from './components/FooterComponent.vue';
 
 export default {
   name: 'App',

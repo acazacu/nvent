@@ -1,6 +1,6 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import VueRouter from "vue-router";
-import ContactErrorComponent from '../../../../src/views/components/ContactErrorComponent.vue';
+import ContactErrorComponent from '../../../src/components/ContactErrorComponent.vue';
 
 const localVue = createLocalVue();
 localVue.use(VueRouter);

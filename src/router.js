@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import HomePage from './views/HomePage.vue';
-import ContactPage from "./views/ContactPage";
-import ContactSuccessComponent from "./views/components/ContactSuccessComponent";
-import ContactErrorComponent from "./views/components/ContactErrorComponent";
-import ContactComponent from "./views/components/ContactComponent";
+import HomePage from './pages/HomePage.vue';
+import ContactPage from "./pages/ContactPage";
+import ContactSuccessComponent from "./components/ContactSuccessComponent";
+import ContactErrorComponent from "./components/ContactErrorComponent";
+import ContactComponent from "./components/ContactComponent";
 
 Vue.use(Router);
 

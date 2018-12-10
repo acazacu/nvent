@@ -1,19 +1,23 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import VueRouter from "vue-router";
-import ContactPage from '../../../src/views/ContactPage.vue';
+import HomePage from '../../../src/pages/HomePage.vue';
 
 const localVue = createLocalVue();
 localVue.use(VueRouter);
 
 let router;
 
-describe('ContactPage', () => {
+describe('HomePage', () => {
   beforeEach(() => {
-    router = new VueRouter({});
+    router = new VueRouter({
+      routes: [
+        { path: '/contact', name: 'contact-form' }
+      ]
+    });
   });
 
   it('creates', () => {
-    const wrapper = mount(ContactPage, { localVue, router });
+    const wrapper = mount(HomePage, { localVue, router });
     expect(wrapper.isVueInstance()).toBeTruthy();
   });
 });

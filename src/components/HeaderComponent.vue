@@ -1,7 +1,7 @@
 <template>
   <header>
     <h1>
-      <router-link exact to="/">{{ siteName }}</router-link>
+      <router-link exact to="/">{{ name }}</router-link>
     </h1>
   </header>
 </template>
@@ -29,11 +29,11 @@
   }
 </style>
 <script>
+  import { mapState } from 'vuex';
+
   export default {
-    data() {
-      return {
-        siteName: 'nvent'
-      }
-    }
+    computed: {
+      ...mapState([ 'name' ])
+    },
   }
 </script>
