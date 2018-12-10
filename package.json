@@ -1,7 +1,7 @@
 {
-  "name": "nvent",
+  "name": "nvent-www",
   "version": "0.7.1",
-  "description": "nvent.nl",
+  "description": "Frontend of https://nvent.nl",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -32,10 +32,10 @@
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.5.17"
   },
-  "homepage": "https://github.com/acazacu/nvent#readme",
+  "homepage": "https://github.com/acazacu/nvent-www#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/acazacu/nvent.git"
+    "url": "git+https://github.com/acazacu/nvent-www.git"
   },
   "author": "Alex Cazacu (https://nvent.nl/)",
   "license": "MIT",
