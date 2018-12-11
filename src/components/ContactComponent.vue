@@ -48,7 +48,8 @@ export default {
     async submitForm() {
       try {
         await this.sendMessage({
-          from: `${this.name}<${this.email}>`,
+          name: this.name,
+          from: this.email,
           message: this.message
         });
         this.$router.push({ name: 'contact-success'})
