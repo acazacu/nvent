@@ -55,7 +55,7 @@
       position: absolute;
       z-index: 2;
       background-color: white;
-      opacity: .2;
+      opacity: .5;
       width: 100%;
       height: 100%;
     }

@@ -1,6 +1,6 @@
 <script>
   import InputComponent from "./InputComponent";
-  import InputMixin from "../mixins/InputMixin";
+  import InputMixin from "../../mixins/InputMixin";
 
   export default {
     name: 'input-email-component',

@@ -1,50 +1,64 @@
 <template>
-  <main>
-    <header-component></header-component>
-    <router-view/>
-    <footer-component></footer-component>
-  </main>
+  <body>
+    <header>
+      <logo-component></logo-component>
+      <nav></nav>
+    </header>
+    <main>
+      <router-view/>
+    </main>
+    <footer>
+      <p class="version">v.{{ version }} 🤯</p>
+      <nav></nav>
+    </footer>
+  </body>
 </template>
 
-<style scoped lang="scss">
-  main {
-    height: 100%;
-    width: 100%;
+<style lang="scss">
+  @import "./styles/normalise";
+  @import "./styles/typography";
+
+  body {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     justify-content: space-between;
-    font-family: 'Muli', sans-serif;
 
     > header {
-      margin: 8px 16px 0 16px;
+      padding: 8px 16px;
     }
 
-    > article {
-      margin: 16px;
+    > main {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: space-between;
     }
 
     > footer {
-      margin: 0 16px 8px 16px;
-    }
+      padding: 8px 16px;
 
-    @media screen and (min-width: 1024px) {
-      align-items: flex-start;
-      justify-content: space-around;
-      margin: auto;
-      width: 640px;
+      .version {
+        font-size: 10px;
+        color: #666666;
+        cursor: default;
+        font-weight: normal;
+      }
     }
   }
 </style>
 <script>
-import HeaderComponent from './components/HeaderComponent.vue';
-import FooterComponent from './components/FooterComponent.vue';
+import LogoComponent from './views/components/LogoComponent.vue';
+import { mapState } from 'vuex';
 
 export default {
   name: 'App',
   components: {
-    'header-component': HeaderComponent,
-    'footer-component': FooterComponent,
+    'logo-component': LogoComponent,
+  },
+  computed: {
+    ...mapState([ 'version' ]),
   },
 };
 </script>

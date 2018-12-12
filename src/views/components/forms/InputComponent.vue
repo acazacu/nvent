@@ -20,7 +20,6 @@
     input, textarea {
       padding: 4px;
       border: 1px solid lightgray;
-      width: 100%;
     }
 
     textarea {
@@ -43,7 +42,7 @@
   }
 </style>
 <script>
-  import InputMixin from "../mixins/InputMixin";
+  import InputMixin from "../../mixins/InputMixin";
 
   export default {
     name: 'input-component',

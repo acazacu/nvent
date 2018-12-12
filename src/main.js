@@ -9,7 +9,7 @@ new Vue({
   router,
   store,
   render: h => h(App),
-}).$mount('main');
+}).$mount('body');
 
 if (process.env.VUE_APP_CLI_MODE === 'development') {
   Vue.config.devtools = true;

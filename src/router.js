@@ -1,20 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import HomePage from './pages/HomePage.vue';
-import ContactPage from "./pages/ContactPage";
-import ContactSuccessComponent from "./components/ContactSuccessComponent";
-import ContactErrorComponent from "./components/ContactErrorComponent";
-import ContactComponent from "./components/ContactComponent";
+import HomePage from './views/HomePage.vue';
+import ContactPage from "./views/ContactPage";
+import ErrorPage from "./views/ErrorPage";
 
 Vue.use(Router);
-
-const beforeEnterContact = (to, from, next) => {
-  if (from.name === 'contact-form') {
-    next();
-  } else {
-    next({ name: 'contact-form' });
-  }
-};
 
 const router = new Router({
   mode: process.env.VUE_APP_ROUTER_MODE,
@@ -29,21 +19,19 @@ const router = new Router({
     {
       path: '/contact',
       component: ContactPage,
-      children: [
-        { path: '', name: 'contact-form', component: ContactComponent },
-        {
-          path: 'success',
-          name: 'contact-success',
-          component: ContactSuccessComponent,
-          beforeEnter: beforeEnterContact,
-        },
-        {
-          path: 'error',
-          name: 'contact-error',
-          component: ContactErrorComponent,
-          beforeEnter: beforeEnterContact,
-        },
-      ]
+      name: 'contact-form'
+    },
+    {
+      path: '/error',
+      component: ErrorPage,
+      name: 'error',
+      beforeEnter: (to, from, next) => {
+        if (from.name) {
+          next();
+        } else {
+          next({ name: 'home' });
+        }
+      }
     },
   ],
 });
