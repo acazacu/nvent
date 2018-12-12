@@ -4,9 +4,9 @@
       <h2>Contact me</h2>
       <p>Leave your message here, together with your email so that I may get back to you if necessary.</p>
       <form-component :submitHandler="submitForm" :abortHandler="cancelForm">
-        <input-text-component name="name" :value="message.name" placeholder="Name..." @input="updateStore"></input-text-component>
-        <input-email-component name="email" v-model="message.email" placeholder="Email..." @input="updateStore"></input-email-component>
-        <input-textarea-component name="message" v-model="message.message" placeholder="Message..." @input="updateStore"></input-textarea-component>
+        <input-text-component name="name" :value="message.name" placeholder="Name..." @input="updateStore" required></input-text-component>
+        <input-email-component name="email" v-model="message.email" placeholder="Email..." @input="updateStore" required></input-email-component>
+        <input-textarea-component name="message" v-model="message.message" placeholder="Message..." @input="updateStore" required></input-textarea-component>
       </form-component>
     </section>
     <section data-rel="message-sent" v-if="success">

@@ -13,10 +13,14 @@ localVue.use(Vuex);
 localVue.use(VueRouter);
 
 describe('App', () => {
-  it('creates and renders correctly', () => {
+  it('creates', () => {
     const wrapper = shallowMount(App, { localVue, store, router });
 
     expect(wrapper.isVueInstance()).toBeTruthy();
+  });
+
+  it('renders the correct version in the footer', () => {
+    const wrapper = shallowMount(App, { localVue, store, router });
 
     expect(wrapper.find('footer .version').text()).toContain(version);
   });
