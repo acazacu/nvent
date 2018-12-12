@@ -1,15 +1,15 @@
 <template>
   <article>
-    <section v-if="!success">
+    <section data-rel="contact-form" v-if="!success">
       <h2>Contact me</h2>
       <p>Leave your message here, together with your email so that I may get back to you if necessary.</p>
       <form-component :submitHandler="submitForm" :abortHandler="cancelForm">
-        <input-text-component v-model="message.name" placeholder="Name..."></input-text-component>
-        <input-email-component v-model="message.email" placeholder="Email..."></input-email-component>
-        <input-textarea-component v-model="message.message" placeholder="Message..."></input-textarea-component>
+        <input-text-component name="name" :value="message.name" placeholder="Name..." @input="updateStore"></input-text-component>
+        <input-email-component name="email" v-model="message.email" placeholder="Email..." @input="updateStore"></input-email-component>
+        <input-textarea-component name="message" v-model="message.message" placeholder="Message..." @input="updateStore"></input-textarea-component>
       </form-component>
     </section>
-    <section v-if="success">
+    <section data-rel="message-sent" v-if="success">
       <h2>Message sent!</h2>
       <p>Your message has been sent. <router-link to="/">Go back to the homepage</router-link>.</p>
     </section>
@@ -29,7 +29,7 @@
   import InputEmailComponent from "./components/forms/InputEmailComponent";
   import InputTextareaComponent from "./components/forms/InputTextareaComponent";
 
-  const { mapActions } = createNamespacedHelpers('contact');
+  const { mapActions, mapState, mapMutations } = createNamespacedHelpers('contact');
 
   export default {
     components: {
@@ -41,33 +41,36 @@
     data() {
       return {
         success: false,
-        message: {
-          name: 'John Doe',
-          email: 'john.doe@example.com',
-          message: 'Hi Nvent!',
-        },
       };
     },
+    computed: {
+      ...mapState([ 'message' ]),
+    },
     methods: {
-      ...mapActions([ 'sendMessage' ]),
+      ...mapActions([ 'sendMessage', 'clearMessage' ]),
+      ...mapMutations([ 'updateMessage' ]),
 
       async submitForm() {
         try {
           await this.sendMessage(this.message);
 
           this.success = true;
-          this.message = { name: '', email: '', message: '' };
+
+          this.clearMessage();
+
         } catch (error) {
           this.$router.push({ name: 'error'})
         }
       },
 
       cancelForm() {
-        this.name = '';
-        this.email = '';
-        this.message = '';
+        this.clearMessage();
 
         this.$router.push({ name: 'home' });
+      },
+
+      updateStore(e) {
+        this.updateMessage({ [e.target.name]: e.target.value });
       },
     },
   }

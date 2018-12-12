@@ -1,8 +1,8 @@
 <template>
   <div class=field v-bind:class="{ 'field-invalid': !isValid }">
     <label v-if="label" :for="id">{{ label }}</label>
-    <input :id="id" v-if="type !== 'textarea'" :type="type" ref="input" :value="value" :placeholder="placeholder" @input="onInput" @change="onChange">
-    <textarea :id="id" v-if="type === 'textarea'" ref="input" :value="value" :placeholder="placeholder" @input="onInput" @change="onChange"></textarea>
+    <input :id="id" :name="name" v-if="type !== 'textarea'" :type="type" ref="input" :value="value" :placeholder="placeholder" @input="onInputInput" @change="onInputChange">
+    <textarea :id="id" :name="name" v-if="type === 'textarea'" ref="input" :value="value" :placeholder="placeholder" @input="onInputInput" @change="onInputChange"></textarea>
     <ul v-if="errors.length > 0">
       <li v-for="error of errors">{{error}}</li>
     </ul>
@@ -49,11 +49,11 @@
     mixins: [ InputMixin ],
 
     methods: {
-      onInput() {
-        this.$emit('input', this.$refs.input.value)
+      onInputInput(e) {
+        this.$emit('input', e);
       },
 
-      onChange() {
+      onInputChange() {
         this.validate();
       },
     },

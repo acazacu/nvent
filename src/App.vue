@@ -2,14 +2,12 @@
   <body>
     <header>
       <logo-component></logo-component>
-      <nav></nav>
     </header>
     <main>
       <router-view/>
     </main>
     <footer>
       <p class="version">v.{{ version }} 🤯</p>
-      <nav></nav>
     </footer>
   </body>
 </template>

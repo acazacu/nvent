@@ -16,6 +16,6 @@ const post = async (url, payload) => {
   }
 };
 
-export {
+export default {
   post
 }
