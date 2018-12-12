@@ -13,10 +13,6 @@ export default {
       type: Boolean,
       default: false
     },
-    multiLine: {
-      type: Boolean,
-      default: false
-    },
     type: {
       type: String,
       default: 'text'

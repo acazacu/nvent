@@ -47,7 +47,6 @@
   export default {
     name: 'input-component',
     mixins: [ InputMixin ],
-
     methods: {
       onInputInput(e) {
         this.$emit('input', e);

@@ -6,7 +6,7 @@
       <form-component :submitHandler="submitForm" :abortHandler="cancelForm">
         <input-text-component name="name" :value="message.name" placeholder="Name..." @input="updateStore" required></input-text-component>
         <input-email-component name="email" v-model="message.email" placeholder="Email..." @input="updateStore" required></input-email-component>
-        <input-textarea-component name="message" v-model="message.message" placeholder="Message..." @input="updateStore" required></input-textarea-component>
+        <textarea-component name="message" v-model="message.message" placeholder="Message..." @input="updateStore" required></textarea-component>
       </form-component>
     </section>
     <section data-rel="message-sent" v-if="success">
@@ -27,7 +27,7 @@
   import InputTextComponent from "./components/forms/InputTextComponent";
   import FormComponent from "./components/forms/FormComponent";
   import InputEmailComponent from "./components/forms/InputEmailComponent";
-  import InputTextareaComponent from "./components/forms/InputTextareaComponent";
+  import TextareaComponent from "./components/forms/TextareaComponent";
 
   const { mapActions, mapState, mapMutations } = createNamespacedHelpers('contact');
 
@@ -36,7 +36,7 @@
       FormComponent,
       InputTextComponent,
       InputEmailComponent,
-      InputTextareaComponent,
+      TextareaComponent,
     },
     data() {
       return {

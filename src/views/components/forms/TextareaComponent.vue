@@ -3,7 +3,7 @@
   import InputMixin from "../../mixins/InputMixin";
 
   export default {
-    name: 'input-textarea-component',
+    name: 'textarea-component',
     extends: InputComponent,
     props: {
       type: {
