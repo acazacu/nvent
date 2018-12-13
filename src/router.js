@@ -1,6 +1,6 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-import HomePage from './views/HomePage.vue';
+import Vue from "vue";
+import Router from "vue-router";
+import HomePage from "./views/HomePage.vue";
 import ContactPage from "./views/ContactPage";
 import ErrorPage from "./views/ErrorPage";
 
@@ -11,29 +11,29 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      alias: '/home',
-      name: 'home',
-      component: HomePage,
+      path: "/",
+      alias: "/home",
+      name: "home",
+      component: HomePage
     },
     {
-      path: '/contact',
+      path: "/contact",
       component: ContactPage,
-      name: 'contact-form'
+      name: "contact-form"
     },
     {
-      path: '/error',
+      path: "/error",
       component: ErrorPage,
-      name: 'error',
+      name: "error",
       beforeEnter: (to, from, next) => {
         if (from.name) {
           next();
         } else {
-          next({ name: 'home' });
+          next({ name: "home" });
         }
       }
-    },
-  ],
+    }
+  ]
 });
 
 export default router;

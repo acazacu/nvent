@@ -1,15 +1,15 @@
 const postOptions = {
-  method: 'POST',
-  mode: 'cors',
-  cache: 'no-cache',
+  method: "POST",
+  mode: "cors",
+  cache: "no-cache",
   headers: {
-    'Content-type': 'application/json; charset=utf-8'
-  },
+    "Content-type": "application/json; charset=utf-8"
+  }
 };
 const post = async (url, payload) => {
   let request = { ...postOptions };
 
-  if(payload) {
+  if (payload) {
     request.body = JSON.stringify(payload);
   }
 
@@ -22,12 +22,12 @@ const post = async (url, payload) => {
   try {
     return await response.json();
   } catch (error) {
-    throw new Error('Invalid response')
+    throw new Error("Invalid response");
   }
 };
 
 const http = {
-  post,
+  post
 };
 
 export default http;

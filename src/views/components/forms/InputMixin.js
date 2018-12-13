@@ -1,10 +1,10 @@
 export default {
   props: {
     value: {
-      required: true,
+      required: true
     },
     placeholder: {
-      type: [ String, Number ]
+      type: [String, Number]
     },
     label: {
       type: String
@@ -15,11 +15,17 @@ export default {
     },
     type: {
       type: String,
-      default: 'text'
+      default: "text"
     },
     id: {
       type: String,
-      default: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+      default:
+        Math.random()
+          .toString(36)
+          .substring(2, 15) +
+        Math.random()
+          .toString(36)
+          .substring(2, 15)
     },
     name: {
       type: String,
@@ -30,13 +36,13 @@ export default {
   data() {
     return {
       errors: []
-    }
+    };
   },
 
   computed: {
     isValid: function() {
       return this.errors.length === 0;
-    },
+    }
   },
 
   mounted() {
@@ -47,17 +53,17 @@ export default {
     this.deregisterField(this);
   },
 
-  inject: [ 'registerField', 'deregisterField' ],
+  inject: ["registerField", "deregisterField"],
 
   methods: {
     validate() {
       const errors = [];
 
       if (this.required && this.value.length === 0) {
-        errors.push('This field is required.')
+        errors.push("This field is required.");
       }
 
       this.errors = errors;
-    },
-  },
-}
+    }
+  }
+};

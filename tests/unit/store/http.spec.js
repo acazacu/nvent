@@ -1,21 +1,21 @@
-import http from 'src/store/http';
-import fetchMock  from 'fetch-mock';
+import http from "src/store/http";
+import fetchMock from "fetch-mock";
 
-describe('http wrapper', () => {
-  const testUrl = 'http://localhost/';
+describe("http wrapper", () => {
+  const testUrl = "http://localhost/";
 
   afterEach(() => {
     fetchMock.restore();
   });
 
-  it('should contain a post method', function () {
+  it("should contain a post method", function() {
     expect(http.post).toBeDefined();
   });
 
-  describe('post', () => {
-    it.only('should call fetch with the correct args',async () => {
-      const request = { req: 'test' };
-      const response = { resp: 'test' };
+  describe("post", () => {
+    it.only("should call fetch with the correct args", async () => {
+      const request = { req: "test" };
+      const response = { resp: "test" };
 
       fetchMock.mock(testUrl, response);
 
@@ -26,7 +26,7 @@ describe('http wrapper', () => {
       expect(fetchMock.lastUrl()).toBe(testUrl);
     });
 
-    it.only('throw an error when the fetch call fails',async () => {
+    it.only("throw an error when the fetch call fails", async () => {
       const response = 503;
 
       fetchMock.mock(testUrl, response);
@@ -34,19 +34,19 @@ describe('http wrapper', () => {
       try {
         await http.post(testUrl);
       } catch (error) {
-        expect(error.message).toBe('Service Unavailable');
+        expect(error.message).toBe("Service Unavailable");
       }
     });
 
-    it.only('throw an error when the fetch call returns invalid json',async () => {
-      const response = 'dfas';
+    it.only("throw an error when the fetch call returns invalid json", async () => {
+      const response = "dfas";
 
       fetchMock.mock(testUrl, response);
 
       try {
         await http.post(testUrl);
       } catch (error) {
-        expect(error.message).toBe('Invalid response');
+        expect(error.message).toBe("Invalid response");
       }
     });
 
