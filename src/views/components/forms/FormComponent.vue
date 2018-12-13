@@ -4,10 +4,10 @@
       <slot></slot>
     </div>
     <div class="form-controls">
-      <a @click="onCancel" title="Cancel">Cancel</a>
+      <a data-rel="cancel-button" @click="onCancel" title="Cancel">Cancel</a>
       <button type="submit">Send</button>
     </div>
-    <div v-if="loading" class="mask-loading"></div>
+    <div data-rel="load-mask" v-if="loading" class="load-mask"></div>
   </form>
 </template>
 <style lang="scss">
@@ -51,7 +51,7 @@
       }
     }
 
-    .mask-loading {
+    .load-mask {
       position: absolute;
       z-index: 2;
       background-color: white;

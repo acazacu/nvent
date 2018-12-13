@@ -42,7 +42,7 @@
   }
 </style>
 <script>
-  import InputMixin from "../../mixins/InputMixin";
+  import InputMixin from "./InputMixin";
 
   export default {
     name: 'input-component',

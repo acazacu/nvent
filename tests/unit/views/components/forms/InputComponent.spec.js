@@ -44,7 +44,7 @@ describe('InputComponent', () => {
     expect(provide.deregisterField).toHaveBeenCalled();
   });
 
-  it('bubbles the input event', () => {
+  it('bubbles the input event as in fires on the input element', () => {
     const wrapper = shallowMount(InputComponent, { localVue, provide, propsData });
 
     wrapper.find('input').setValue('test');
@@ -52,7 +52,7 @@ describe('InputComponent', () => {
     expect(wrapper.emitted().input).toBeTruthy();
   });
 
-  it('triggers the validators on change', () => {
+  it('validates on the input change event', () => {
     const wrapper = shallowMount(InputComponent, { localVue, provide, propsData });
     const validateSpy = jest.spyOn(wrapper.vm, 'validate');
 
@@ -60,14 +60,14 @@ describe('InputComponent', () => {
     expect(validateSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('validates an empty field when not passed the required prop', () => {
+  it('accepts empty values by default', () => {
     const wrapper = shallowMount(InputComponent, { localVue, provide, propsData });
 
     wrapper.find('input').trigger('change');
     expect(wrapper.vm.isValid).toBeTruthy();
   });
 
-  it('invalidates an empty field when passed the required prop', () => {
+  it('validates against empty values when configured to do so', () => {
     const wrapper = shallowMount(InputComponent, { localVue, provide, propsData: { ...propsData, required: true } });
 
     wrapper.find('input').trigger('change');
