@@ -111,9 +111,7 @@
       deregisterField(field) {
         const index = this.fields.indexOf(field);
 
-        if(index !== -1) {
-          this.fields.splice(index, 1)
-        }
+        this.fields.splice(index, 1)
       },
     },
   }
