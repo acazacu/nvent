@@ -9,7 +9,7 @@ let ChildComponent = Vue.component("child-component", {
   template: "<div></div>",
   inject: ["registerField", "deregisterField"],
   methods: {
-    checkValidity: jest.fn()
+    validate: jest.fn()
   }
 });
 
@@ -88,24 +88,22 @@ describe("FormComponent", () => {
   it("should only validate true when all fields check as valid", async () => {
     const children = wrapper.findAll(ChildComponent);
 
-    children.setMethods({});
-
     const child1 = children.at(0);
     child1.vm.registerField(child1.vm);
     child1.setMethods({
-      checkValidity: jest.fn().mockReturnValue(true)
+      validate: jest.fn().mockReturnValue([])
     });
 
     const child2 = children.at(1);
     child2.vm.registerField(child2.vm);
-    child2.setData({
-      checkValidity: jest.fn().mockReturnValue(false)
+    child2.setMethods({
+      validate: jest.fn().mockReturnValue(["error"])
     });
 
     expect(wrapper.vm.isValid()).toBeFalsy();
 
     child2.setMethods({
-      checkValidity: jest.fn().mockReturnValue(true)
+      validate: jest.fn().mockReturnValue([])
     });
 
     expect(wrapper.vm.isValid()).toBeTruthy();

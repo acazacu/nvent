@@ -10,22 +10,26 @@ export default {
       default: "textarea"
     },
     minimumCharacters: {
-      type: Number
+      type: Number,
+      default: 0
     }
   },
   methods: {
     validate() {
-      InputMixin.methods.validate.call(this);
+      const errors = InputMixin.methods.validate.call(this);
 
-      if (this.minimumCharacters) {
-        const valueLength = this.value.length;
+      const valueLength = this.value.length;
 
-        if (!(valueLength === 0 || valueLength >= this.minimumCharacters)) {
-          this.errors.push(
-            `This field must contain at least ${this.minimumCharacters} characters.`
-          );
-        }
+      if (
+        this.minimumCharacters !== 0 &&
+        !(valueLength === 0 || valueLength >= this.minimumCharacters)
+      ) {
+        errors.push(`This field must contain at least ${this.minimumCharacters} characters.`);
       }
+
+      this.errors = errors;
+
+      return errors;
     }
   }
 };

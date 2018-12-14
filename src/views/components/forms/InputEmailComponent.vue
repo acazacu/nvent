@@ -17,13 +17,17 @@ export default {
   },
   methods: {
     validate() {
-      InputMixin.methods.validate.call(this);
+      const errors = InputMixin.methods.validate.call(this);
 
       const pattern = new RegExp(this.pattern);
 
       if (!(this.value.length === 0 || pattern.test(this.value))) {
-        this.errors.push("The email entered is invalid!");
+        errors.push("The email entered is invalid!");
       }
+
+      this.errors = errors;
+
+      return errors;
     }
   }
 };

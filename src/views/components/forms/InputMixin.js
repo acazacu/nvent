@@ -8,6 +8,8 @@ export default {
       }
 
       this.errors = errors;
+
+      return errors;
     }
   }
 };

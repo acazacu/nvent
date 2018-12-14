@@ -71,15 +71,11 @@ export default {
   inject: ["registerField", "deregisterField"],
 
   mounted() {
-    if (this.registerField) {
-      this.registerField(this);
-    }
+    this.registerField(this);
   },
 
   beforeDestroy() {
-    if (this.deregisterField) {
-      this.deregisterField(this);
-    }
+    this.deregisterField(this);
   },
 
   data() {
@@ -115,8 +111,8 @@ export default {
   },
 
   computed: {
-    isValid: function() {
-      return this.errors.length === 0;
+    isValid: function(state) {
+      return state.errors.length === 0;
     }
   },
 
@@ -127,12 +123,6 @@ export default {
 
     onInputChange() {
       this.validate();
-    },
-
-    checkValidity() {
-      this.validate();
-
-      return this.isValid;
     }
   }
 };

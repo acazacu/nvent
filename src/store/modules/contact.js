@@ -1,16 +1,16 @@
 import { post } from "../http";
 import defaultState from "./contact.json";
 
-const contactMutations = {
+export const mutations = {
   updateMessage(state, payload) {
     state.message = { ...state.message, ...payload };
   }
 };
 
-const contactActions = {
-  async sendMessage({ rootState, dispatch, state }) {
+export const actions = {
+  async sendMessage({ dispatch, state }) {
     try {
-      await post(`${rootState.baseUrlApi}/contact`, state.message);
+      await post(`${process.env.VUE_APP_BASE_URL_API}/contact`, state.message);
       dispatch("clearMessage");
     } catch (error) {
       throw error;
@@ -25,6 +25,6 @@ const contactActions = {
 export default {
   namespaced: true,
   state: defaultState,
-  mutations: contactMutations,
-  actions: contactActions
+  mutations: mutations,
+  actions: actions
 };

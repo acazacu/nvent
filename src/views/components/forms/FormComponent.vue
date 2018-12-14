@@ -75,7 +75,7 @@ export default {
     },
 
     isValid() {
-      return this.fields.map(field => field.checkValidity()).every(result => result);
+      return this.fields.map(field => field.validate().length === 0).every(result => result);
     },
 
     registerField(field) {
