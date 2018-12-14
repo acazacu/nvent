@@ -1,18 +1,20 @@
-import { mount, createLocalVue } from "@vue/test-utils";
-import VueRouter from "vue-router";
-import Vuex from "vuex";
+import { createLocalVue, shallowMount, RouterLinkStub } from "@vue/test-utils";
 
-import store from "src/store";
-import router from "src/router";
 import HomePage from "src/views/HomePage";
 
 const localVue = createLocalVue();
-localVue.use(VueRouter);
-localVue.use(Vuex);
 
 describe("HomePage", () => {
-  it("creates", () => {
-    const wrapper = mount(HomePage, { localVue, store, router });
+  it("should create", () => {
+    const wrapper = shallowMount(HomePage, {
+      localVue,
+      stubs: {
+        RouterLink: RouterLinkStub
+      },
+      mocks: {
+        $store: jest.fn()
+      }
+    });
     expect(wrapper.isVueInstance()).toBeTruthy();
   });
 });

@@ -1,155 +1,113 @@
-import { mount, createLocalVue } from "@vue/test-utils";
+import { shallowMount, createLocalVue } from "@vue/test-utils";
 
 import FormComponent from "src/views/components/forms/FormComponent";
 import Vue from "vue";
-import flushPromises from "flush-promises";
 
 const localVue = createLocalVue();
 
-let fieldComponentId = 0;
-const fieldComponentFactory = (validateSpy = jest.fn(), withErrors = false) => {
-  return Vue.component(`field-component${fieldComponentId++}`, {
-    template: `<input type="text" data-rel="field-component${fieldComponentId++}"></input>`,
-    inject: ["registerField", "deregisterField"],
-    mounted: function() {
-      this.registerField(this);
-    },
-    destroyed() {
-      this.deregisterField(this);
-    },
-    methods: {
-      validate: validateSpy
-    },
-    data() {
-      return {
-        errors: withErrors ? ["test-error"] : []
-      };
-    }
-  });
-};
+let ChildComponent = Vue.component("child-component", {
+  template: "<div></div>",
+  inject: ["registerField", "deregisterField"],
+  methods: {
+    checkValidity: jest.fn()
+  }
+});
 
 describe("FormComponent", () => {
-  let submitHandlerSpy;
-  let abortHandlerSpy;
-  let propsData;
+  let wrapper;
 
   beforeEach(() => {
-    submitHandlerSpy = jest.fn();
-    abortHandlerSpy = jest.fn();
-    propsData = { submitHandler: submitHandlerSpy, abortHandler: abortHandlerSpy };
+    wrapper = shallowMount(FormComponent, {
+      localVue,
+      slots: {
+        default: [ChildComponent, ChildComponent]
+      }
+    });
   });
 
-  it("creates", () => {
-    const wrapper = mount(FormComponent, { localVue, propsData });
-
+  it("should create", () => {
     expect(wrapper.isVueInstance()).toBeTruthy();
   });
 
-  it("provides a method for fields to register themselves to the form", () => {
-    const wrapper = mount(FormComponent, {
-      localVue,
-      propsData,
-      slots: {
-        default: [fieldComponentFactory()]
-      }
-    });
+  it("should provide register and deregister methods to its child components", () => {
+    expect(wrapper.find(ChildComponent).vm.registerField).toBeDefined();
+    expect(wrapper.find(ChildComponent).vm.deregisterField).toBeDefined();
+  });
+
+  it("should de/register fields via the provided registerField method ", () => {
+    const childComponentVm = wrapper.find(ChildComponent).vm;
+
+    childComponentVm.registerField(childComponentVm);
 
     expect(wrapper.vm.$data.fields.length).toBe(1);
+    expect(wrapper.vm.$data.fields).toContain(childComponentVm);
+
+    childComponentVm.deregisterField(childComponentVm);
+
+    expect(wrapper.vm.$data.fields.length).toBe(0);
   });
 
-  it("provides a method for fields to deregister themselves to the form", () => {
-    const fieldComponent1 = fieldComponentFactory();
-    const fieldComponent2 = fieldComponentFactory();
-    const wrapper = mount(FormComponent, {
-      localVue,
-      propsData,
-      slots: {
-        default: [fieldComponent1, fieldComponent2]
-      }
-    });
-
-    expect(wrapper.vm.$data.fields.length).toBe(2);
-
-    const fieldComponent1Wrapper = wrapper.find(fieldComponent1);
-    fieldComponent1Wrapper.destroy();
-
-    expect(wrapper.vm.$data.fields.length).toBe(1);
-
-    const fieldComponent2Wrapper = wrapper.find(fieldComponent2);
-    expect(wrapper.vm.$data.fields).toContain(fieldComponent2Wrapper.vm);
-  });
-
-  it("does not submit when some fields are invalid", async () => {
-    const fieldValidateSpy = jest.fn().mockReturnValue();
-    const fieldComponent1 = fieldComponentFactory(fieldValidateSpy, true);
-    const fieldComponent2 = fieldComponentFactory(fieldValidateSpy, false);
-    const wrapper = mount(FormComponent, {
-      localVue,
-      propsData,
-      slots: {
-        default: [fieldComponent1, fieldComponent2]
-      }
-    });
-
-    wrapper.find("form").trigger("submit");
-
-    await flushPromises();
-
-    expect(fieldValidateSpy).toHaveBeenCalled();
-    expect(submitHandlerSpy).not.toHaveBeenCalled();
-  });
-
-  it("submits when all registered fields have validated", async () => {
-    const fieldComponent1 = fieldComponentFactory(undefined, false);
-    const fieldComponent2 = fieldComponentFactory(undefined, false);
-    const wrapper = mount(FormComponent, {
-      localVue,
-      propsData,
-      slots: {
-        default: [fieldComponent1, fieldComponent2]
-      }
-    });
-
-    submitHandlerSpy.mockReturnValue(Promise.resolve());
-    wrapper.find("form").trigger("submit");
-
-    expect(wrapper.vm.$data.loading).toBeTruthy();
-
-    await flushPromises();
-
-    expect(wrapper.vm.$data.loading).toBeFalsy();
-
-    expect(submitHandlerSpy).toHaveBeenCalled();
-  });
-
-  it("displays a load mask while submitting", async () => {
-    const fieldComponent = fieldComponentFactory(undefined, false);
-    const wrapper = mount(FormComponent, {
-      localVue,
-      propsData,
-      slots: {
-        default: [fieldComponent]
-      }
-    });
-
-    submitHandlerSpy.mockReturnValue(Promise.resolve());
-    wrapper.find("form").trigger("submit");
-
-    expect(wrapper.find(".load-mask").exists()).toBeTruthy();
-
-    await flushPromises();
-
-    expect(wrapper.find(".load-mask").exists()).toBeFalsy();
-  });
-
-  it("executes the abort handler when cancel is clicked", async () => {
-    const wrapper = mount(FormComponent, {
-      localVue,
-      propsData
-    });
-
+  it("should trigger the custom event cancel when clicking the cancel button", function() {
     wrapper.find('[data-rel="cancel-button"]').trigger("click");
 
-    expect(abortHandlerSpy).toHaveBeenCalled();
+    expect(wrapper.emitted("cancel")).toBeTruthy();
+  });
+
+  it("should validate when clicking the submit button", () => {
+    const isValidSpy = jest.fn();
+
+    wrapper.setMethods({
+      isValid: isValidSpy
+    });
+
+    wrapper.find("form").trigger("submit");
+
+    expect(isValidSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it("should trigger the custom event submit when clicking the submit button and validation passes", async () => {
+    wrapper.setMethods({
+      isValid: jest.fn().mockReturnValue(true)
+    });
+
+    wrapper.find("form").trigger("submit");
+
+    expect(wrapper.emitted("submit")).toBeTruthy();
+  });
+
+  it("should not trigger the custom event submit when clicking the submit button and validation fails", async () => {
+    wrapper.setMethods({
+      isValid: jest.fn().mockReturnValue(false)
+    });
+
+    wrapper.find("form").trigger("submit");
+
+    expect(wrapper.emitted("submit")).toBeFalsy();
+  });
+
+  it("should only validate true when all fields check as valid", async () => {
+    const children = wrapper.findAll(ChildComponent);
+
+    children.setMethods({});
+
+    const child1 = children.at(0);
+    child1.vm.registerField(child1.vm);
+    child1.setMethods({
+      checkValidity: jest.fn().mockReturnValue(true)
+    });
+
+    const child2 = children.at(1);
+    child2.vm.registerField(child2.vm);
+    child2.setData({
+      checkValidity: jest.fn().mockReturnValue(false)
+    });
+
+    expect(wrapper.vm.isValid()).toBeFalsy();
+
+    child2.setMethods({
+      checkValidity: jest.fn().mockReturnValue(true)
+    });
+
+    expect(wrapper.vm.isValid()).toBeTruthy();
   });
 });

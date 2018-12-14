@@ -3,33 +3,35 @@ import { shallowMount, createLocalVue } from "@vue/test-utils";
 import InputEmailComponent from "src/views/components/forms/InputEmailComponent";
 
 const localVue = createLocalVue();
-const provide = {
-  registerField: jest.fn(),
-  deregisterField: jest.fn()
-};
-const propsData = {
-  name: "test",
-  value: ""
-};
 
 describe("InputEmailComponent", () => {
-  it("creates", () => {
-    const wrapper = shallowMount(InputEmailComponent, { localVue, provide, propsData });
+  let wrapper;
 
+  beforeEach(() => {
+    wrapper = shallowMount(InputEmailComponent, {
+      localVue,
+      propsData: {
+        name: "test",
+        value: ""
+      },
+      provide: {
+        registerField: jest.fn(),
+        deregisterField: jest.fn()
+      }
+    });
+  });
+
+  it("should create", () => {
     expect(wrapper.isVueInstance()).toBeTruthy();
   });
 
-  it("renders an email input", () => {
-    const wrapper = shallowMount(InputEmailComponent, { localVue, provide, propsData });
-
-    expect(wrapper.find('input[type="email"]').exists()).toBeTruthy();
+  it("should render an input of type email", () => {
+    expect(wrapper.find("input").attributes().type).toBe("email");
   });
 
-  it("invalidates an incorrect email value", () => {
-    const wrapper = shallowMount(InputEmailComponent, {
-      localVue,
-      provide,
-      propsData: { ...propsData, value: "test" }
+  it("should validate against incorrect email addresses", () => {
+    wrapper.setProps({
+      value: "sdfsafas"
     });
 
     wrapper.vm.validate();
@@ -37,11 +39,9 @@ describe("InputEmailComponent", () => {
     expect(wrapper.vm.isValid).toBeFalsy();
   });
 
-  it("validates a correct email value", () => {
-    const wrapper = shallowMount(InputEmailComponent, {
-      localVue,
-      provide,
-      propsData: { ...propsData, value: "test@example.com" }
+  it("should validate a correct email value", () => {
+    wrapper.setProps({
+      value: "john.doe@example.com"
     });
 
     wrapper.vm.validate();

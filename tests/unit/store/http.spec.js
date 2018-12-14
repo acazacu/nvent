@@ -8,10 +8,6 @@ describe("http wrapper", () => {
     fetchMock.restore();
   });
 
-  it("should contain a post method", function() {
-    expect(http.post).toBeDefined();
-  });
-
   describe("post", () => {
     it.only("should call fetch with the correct args", async () => {
       const request = { req: "test" };
@@ -49,22 +45,5 @@ describe("http wrapper", () => {
         expect(error.message).toBe("Invalid response");
       }
     });
-
-    // it('returns the response json for a valid response', function () {
-    //   const response = validResponseStub;
-    //   const url = 'example.com';
-    //
-    //   global.fetch.mockResolvedValue({
-    //     ok: true,
-    //     body
-    //   });
-    //
-    //   http.post(url, payload);
-    //
-    //   expect(global.fetch).toHaveBeenCalledWith(url, {
-    //     ...http.postOptions,
-    //     body: JSON.stringify(payload)
-    //   });
-    // });
   });
 });

@@ -1,18 +1,17 @@
-import { mount, createLocalVue } from "@vue/test-utils";
-import VueRouter from "vue-router";
-import Vuex from "vuex";
+import { shallowMount, createLocalVue, RouterLinkStub } from "@vue/test-utils";
 
-import store from "src/store";
-import router from "src/router";
 import ErrorPage from "src/views/ErrorPage";
 
 const localVue = createLocalVue();
-localVue.use(VueRouter);
-localVue.use(Vuex);
 
 describe("ErrorPage", () => {
-  it("creates", () => {
-    const wrapper = mount(ErrorPage, { localVue, store, router });
+  it("should create", () => {
+    const wrapper = shallowMount(ErrorPage, {
+      localVue,
+      stubs: {
+        RouterLink: RouterLinkStub
+      }
+    });
     expect(wrapper.isVueInstance()).toBeTruthy();
   });
 });

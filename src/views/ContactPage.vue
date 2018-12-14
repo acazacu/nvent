@@ -6,7 +6,7 @@
         Leave your message here, together with your email so that I may get back to you if
         necessary.
       </p>
-      <form-component :submitHandler="submitForm" :abortHandler="cancelForm">
+      <form-component v-on:submit="submitForm" v-on:cancel="cancelContact">
         <input-text-component
           name="name"
           :value="message.name"
@@ -28,6 +28,7 @@
           @input="updateStore"
           required
         ></textarea-component>
+        <div data-rel="load-mask" v-if="loading" class="load-mask"></div>
       </form-component>
     </section>
     <section data-rel="message-sent" v-if="success">
@@ -41,6 +42,15 @@ article {
   margin: 8px;
   color: #333;
   width: 580px;
+
+  .load-mask {
+    position: absolute;
+    z-index: 2;
+    background-color: white;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>
 <script>
@@ -61,7 +71,8 @@ export default {
   },
   data() {
     return {
-      success: false
+      success: false,
+      loading: false
     };
   },
   computed: {
@@ -73,17 +84,20 @@ export default {
 
     async submitForm() {
       try {
-        await this.sendMessage(this.message);
+        this.loading = true;
+        await this.sendMessage();
 
         this.success = true;
 
         this.clearMessage();
       } catch (error) {
         this.$router.push({ name: "error" });
+      } finally {
+        this.loading = false;
       }
     },
 
-    cancelForm() {
+    cancelContact() {
       this.clearMessage();
 
       this.$router.push({ name: "home" });

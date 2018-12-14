@@ -1,25 +1,16 @@
 import { post } from "../http";
+import defaultState from "./contact.json";
 
-const generateDefaultState = () => ({
-  message: {
-    name: "",
-    email: "",
-    message: ""
-  }
-});
-
-const defaultState = generateDefaultState();
-
-const mutations = {
+const contactMutations = {
   updateMessage(state, payload) {
     state.message = { ...state.message, ...payload };
   }
 };
 
-const actions = {
-  async sendMessage({ rootState, dispatch }, message) {
+const contactActions = {
+  async sendMessage({ rootState, dispatch, state }) {
     try {
-      await post(`${rootState.baseUrlApi}/contact`, message);
+      await post(`${rootState.baseUrlApi}/contact`, state.message);
       dispatch("clearMessage");
     } catch (error) {
       throw error;
@@ -31,11 +22,9 @@ const actions = {
   }
 };
 
-const store = {
+export default {
   namespaced: true,
-  state: generateDefaultState(),
-  mutations,
-  actions
+  state: defaultState,
+  mutations: contactMutations,
+  actions: contactActions
 };
-
-export { store as default, defaultState, mutations, actions };

@@ -68,6 +68,58 @@ import InputMixin from "./InputMixin";
 export default {
   name: "input-component",
   mixins: [InputMixin],
+  inject: ["registerField", "deregisterField"],
+
+  mounted() {
+    if (this.registerField) {
+      this.registerField(this);
+    }
+  },
+
+  beforeDestroy() {
+    if (this.deregisterField) {
+      this.deregisterField(this);
+    }
+  },
+
+  data() {
+    return {
+      errors: []
+    };
+  },
+
+  props: {
+    value: {
+      required: true
+    },
+    placeholder: [String, Number],
+    label: String,
+    required: {
+      type: Boolean,
+      default: false
+    },
+    type: {
+      type: String,
+      default: "text"
+    },
+    id: {
+      type: String,
+      default: Math.random()
+        .toString(36)
+        .substring(2, 15)
+    },
+    name: {
+      type: String,
+      required: true
+    }
+  },
+
+  computed: {
+    isValid: function() {
+      return this.errors.length === 0;
+    }
+  },
+
   methods: {
     onInputInput(e) {
       this.$emit("input", e);
@@ -75,6 +127,12 @@ export default {
 
     onInputChange() {
       this.validate();
+    },
+
+    checkValidity() {
+      this.validate();
+
+      return this.isValid;
     }
   }
 };

@@ -1,88 +1,83 @@
 import { shallowMount, createLocalVue } from "@vue/test-utils";
-
 import InputComponent from "src/views/components/forms/InputComponent";
 
 const localVue = createLocalVue();
-const provide = {
-  registerField: jest.fn(),
-  deregisterField: jest.fn()
-};
-const propsData = {
-  name: "test",
-  value: ""
-};
-describe("InputComponent", () => {
-  it("creates", () => {
-    const wrapper = shallowMount(InputComponent, { localVue, provide, propsData });
 
+describe("InputComponent", () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallowMount(InputComponent, {
+      localVue,
+      propsData: {
+        name: "test",
+        value: ""
+      },
+      provide: {
+        registerField: jest.fn(),
+        deregisterField: jest.fn()
+      }
+    });
+  });
+
+  it("should create", () => {
     expect(wrapper.isVueInstance()).toBeTruthy();
   });
 
-  it("renders a label when provided one via props", () => {
-    const wrapper = shallowMount(InputComponent, {
-      localVue,
-      provide,
-      propsData: { ...propsData, label: "test" }
-    });
-
-    expect(wrapper.find("label").exists()).toBeTruthy();
-    expect(wrapper.find("label").text()).toBe("test");
+  it("should call the provided registerField method on mount", () => {
+    expect(wrapper.vm.registerField).toHaveBeenCalled();
   });
 
-  it("passes a placeholder when to the input when provided one via props", () => {
-    const wrapper = shallowMount(InputComponent, {
-      localVue,
-      provide,
-      propsData: { ...propsData, placeholder: "test" }
-    });
-
-    expect(wrapper.find("input").attributes("placeholder")).toBe("test");
-  });
-
-  it("calls the provided register function on mount", () => {
-    shallowMount(InputComponent, { localVue, provide, propsData });
-
-    expect(provide.registerField).toHaveBeenCalled();
-  });
-
-  it("calls the provided deregister function on destroy", () => {
-    const wrapper = shallowMount(InputComponent, { localVue, provide, propsData });
-
+  it("should call the provided deregisterField method on destroy", () => {
     wrapper.destroy();
-    expect(provide.deregisterField).toHaveBeenCalled();
+    expect(wrapper.vm.deregisterField).toHaveBeenCalled();
   });
 
-  it("bubbles the input event as in fires on the input element", () => {
-    const wrapper = shallowMount(InputComponent, { localVue, provide, propsData });
+  it("should render a label when provided one via props", () => {
+    wrapper.setProps({
+      label: "label-test"
+    });
 
+    expect(wrapper.find("label").text()).toBe("label-test");
+  });
+
+  it("should render a placeholder when provided one via props", () => {
+    wrapper.setProps({
+      placeholder: "placeholder-test"
+    });
+
+    expect(wrapper.find("input").attributes("placeholder")).toBe("placeholder-test");
+  });
+
+  it("should bubble the input event from the input element", () => {
     wrapper.find("input").setValue("test");
 
     expect(wrapper.emitted().input).toBeTruthy();
   });
 
-  it("validates on the input change event", () => {
-    const wrapper = shallowMount(InputComponent, { localVue, provide, propsData });
-    const validateSpy = jest.spyOn(wrapper.vm, "validate");
-
-    wrapper.find("input").trigger("change");
-    expect(validateSpy).toHaveBeenCalledTimes(1);
-  });
-
-  it("accepts empty values by default", () => {
-    const wrapper = shallowMount(InputComponent, { localVue, provide, propsData });
-
-    wrapper.find("input").trigger("change");
-    expect(wrapper.vm.isValid).toBeTruthy();
-  });
-
-  it("validates against empty values when configured to do so", () => {
-    const wrapper = shallowMount(InputComponent, {
-      localVue,
-      provide,
-      propsData: { ...propsData, required: true }
+  it("should validate on the input change event", () => {
+    wrapper.setMethods({
+      validate: jest.fn()
     });
 
     wrapper.find("input").trigger("change");
+
+    expect(wrapper.vm.validate).toHaveBeenCalled();
+  });
+
+  it("should accept empty values by default", () => {
+    wrapper.find("input").trigger("change");
+
+    expect(wrapper.vm.isValid).toBeTruthy();
+  });
+
+  it("should validate against empty values when configured to do so", () => {
+    wrapper.setProps({
+      required: true
+    });
+
+    wrapper.find("input").trigger("change");
+
     expect(wrapper.vm.isValid).toBeFalsy();
   });
 });

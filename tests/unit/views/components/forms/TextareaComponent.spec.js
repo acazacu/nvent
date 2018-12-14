@@ -3,33 +3,36 @@ import { shallowMount, createLocalVue } from "@vue/test-utils";
 import TextareaComponent from "src/views/components/forms/TextareaComponent";
 
 const localVue = createLocalVue();
-const provide = {
-  registerField: jest.fn(),
-  deregisterField: jest.fn()
-};
-const propsData = {
-  name: "test",
-  value: ""
-};
 
 describe("TextareaComponent", () => {
-  it("creates", () => {
-    const wrapper = shallowMount(TextareaComponent, { localVue, provide, propsData });
+  let wrapper;
 
+  beforeEach(() => {
+    wrapper = shallowMount(TextareaComponent, {
+      localVue,
+      propsData: {
+        name: "test",
+        value: ""
+      },
+      provide: {
+        registerField: jest.fn(),
+        deregisterField: jest.fn()
+      }
+    });
+  });
+
+  it("should creates", () => {
     expect(wrapper.isVueInstance()).toBeTruthy();
   });
 
-  it("renders a text input", () => {
-    const wrapper = shallowMount(TextareaComponent, { localVue, provide, propsData });
-
+  it("should render a textarea", () => {
     expect(wrapper.find("textarea").exists()).toBeTruthy();
   });
 
-  it("invalidates a field with too few characters when the minimum-characters prop is set", () => {
-    const wrapper = shallowMount(TextareaComponent, {
-      localVue,
-      provide,
-      propsData: { ...propsData, value: "hi", minimumCharacters: 3 }
+  it("should validate against values with a character count lower than the minimum set", () => {
+    wrapper.setProps({
+      value: "hi",
+      minimumCharacters: 3
     });
 
     wrapper.vm.validate();
@@ -37,11 +40,10 @@ describe("TextareaComponent", () => {
     expect(wrapper.vm.isValid).toBeFalsy();
   });
 
-  it("validates a field with enough characters when the minimum-characters prop is set", () => {
-    const wrapper = shallowMount(TextareaComponent, {
-      localVue,
-      provide,
-      propsData: { ...propsData, value: "test", minimumCharacters: 3 }
+  it("should validate a value with a character count lower than the minimum set", () => {
+    wrapper.setProps({
+      value: "hi nvent",
+      minimumCharacters: 3
     });
 
     wrapper.vm.validate();

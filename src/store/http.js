@@ -6,7 +6,7 @@ const postOptions = {
     "Content-type": "application/json; charset=utf-8"
   }
 };
-const post = async (url, payload) => {
+export const post = async (url, payload) => {
   let request = { ...postOptions };
 
   if (payload) {
@@ -26,8 +26,6 @@ const post = async (url, payload) => {
   }
 };
 
-const http = {
+export default {
   post
 };
-
-export default http;

@@ -3,9 +3,8 @@
     <div class="form-items"><slot></slot></div>
     <div class="form-controls">
       <a data-rel="cancel-button" @click="onCancel" title="Cancel">Cancel</a>
-      <button type="submit">Send</button>
+      <button data-rel="submit-button" type="submit">Send</button>
     </div>
-    <div data-rel="load-mask" v-if="loading" class="load-mask"></div>
   </form>
 </template>
 <style lang="scss">
@@ -48,34 +47,14 @@ form {
       }
     }
   }
-
-  .load-mask {
-    position: absolute;
-    z-index: 2;
-    background-color: white;
-    opacity: 0.5;
-    width: 100%;
-    height: 100%;
-  }
 }
 </style>
 <script>
 export default {
   name: "form-component",
-  props: {
-    submitHandler: {
-      type: Function,
-      required: true
-    },
-    abortHandler: {
-      type: Function,
-      required: true
-    }
-  },
   data() {
     return {
-      fields: [],
-      loading: false
+      fields: []
     };
   },
   provide() {
@@ -85,23 +64,20 @@ export default {
     };
   },
   methods: {
-    async onSubmit() {
-      const valid = this.fields
-        .map(field => {
-          field.validate();
-          return field.errors.length === 0;
-        })
-        .every(result => result);
-
-      if (valid) {
-        this.loading = true;
-        await this.submitHandler();
-        this.loading = false;
+    onSubmit(e) {
+      if (this.isValid()) {
+        this.$emit("submit", e);
       }
     },
+
     onCancel() {
-      this.abortHandler();
+      this.$emit("cancel");
     },
+
+    isValid() {
+      return this.fields.map(field => field.checkValidity()).every(result => result);
+    },
+
     registerField(field) {
       this.fields.push(field);
     },

@@ -3,25 +3,29 @@ import { shallowMount, createLocalVue } from "@vue/test-utils";
 import InputTextComponent from "src/views/components/forms/InputTextComponent";
 
 const localVue = createLocalVue();
-const provide = {
-  registerField: jest.fn(),
-  deregisterField: jest.fn()
-};
-const propsData = {
-  name: "test",
-  value: ""
-};
 
 describe("InputTextComponent", () => {
-  it("creates", () => {
-    const wrapper = shallowMount(InputTextComponent, { localVue, provide, propsData });
+  let wrapper;
 
+  beforeEach(() => {
+    wrapper = shallowMount(InputTextComponent, {
+      localVue,
+      propsData: {
+        name: "test",
+        value: ""
+      },
+      provide: {
+        registerField: jest.fn(),
+        deregisterField: jest.fn()
+      }
+    });
+  });
+
+  it("should create", () => {
     expect(wrapper.isVueInstance()).toBeTruthy();
   });
 
-  it("renders a text input", () => {
-    const wrapper = shallowMount(InputTextComponent, { localVue, provide, propsData });
-
-    expect(wrapper.find('input[type="text"]').exists()).toBeTruthy();
+  it("should render an input of type text", () => {
+    expect(wrapper.find("input").attributes().type).toBe("text");
   });
 });
