@@ -23,7 +23,7 @@ describe("contact store module", () => {
   describe("mutations", () => {
     it("should updateMessage", function() {
       const update = {
-        name: "Jane Doe",
+        subject: "Hellp nvent",
         email: "jane.doe@example.com",
         message: "Hello nvent"
       };

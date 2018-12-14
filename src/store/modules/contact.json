@@ -1,7 +1,7 @@
 {
   "message": {
-    "name": "",
     "email": "",
+    "subject": "",
     "message": ""
   }
 }

@@ -7,13 +7,6 @@
         necessary.
       </p>
       <form-component v-on:submit="submitForm" v-on:cancel="cancelContact">
-        <input-text-component
-          name="name"
-          :value="message.name"
-          placeholder="Name..."
-          @input="updateStore"
-          required
-        ></input-text-component>
         <input-email-component
           name="email"
           v-model="message.email"
@@ -21,6 +14,13 @@
           @input="updateStore"
           required
         ></input-email-component>
+        <input-text-component
+          name="subject"
+          :value="message.subject"
+          placeholder="Subject..."
+          @input="updateStore"
+          required
+        ></input-text-component>
         <textarea-component
           name="message"
           v-model="message.message"
