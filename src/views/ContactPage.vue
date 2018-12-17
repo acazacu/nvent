@@ -41,7 +41,7 @@
 article {
   margin: 8px;
   color: #333;
-  width: 580px;
+  max-width: 580px;
 
   .load-mask {
     position: absolute;

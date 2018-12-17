@@ -112,8 +112,8 @@ export default {
   },
 
   computed: {
-    isValid: function(state) {
-      return state.errors.length === 0;
+    isValid: function() {
+      return this.errors.length === 0;
     }
   },
 

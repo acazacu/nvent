@@ -18,7 +18,11 @@ export const actions = {
   },
 
   clearMessage({ commit }) {
-    commit("updateMessage", defaultState.message);
+    commit("updateMessage", {
+      message: "",
+      subject: "",
+      email: ""
+    });
   }
 };
 
