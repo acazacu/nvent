@@ -1,6 +1,6 @@
 {
   "name": "nvent-www",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "Frontend of https://nvent.nl",
   "scripts": {
     "serve": "vue-cli-service serve",
