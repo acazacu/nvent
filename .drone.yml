@@ -16,6 +16,13 @@ pipeline:
     when:
       event: push
 
+  test:
+    image: node:10.13.0-alpine
+    commands:
+      - yarn run test:unit
+    when:
+      event: push
+
   build-dev:
     image: node:10.13.0-alpine
     commands:
