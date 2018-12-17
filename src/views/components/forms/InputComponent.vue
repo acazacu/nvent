@@ -2,9 +2,10 @@
   <div class="field" v-bind:class="{ 'field-invalid': !isValid }">
     <label v-if="label" :for="id">{{ label }}</label>
     <input
+      v-if="type !== 'textarea'"
+      autocomplete="off"
       :id="id"
       :name="name"
-      v-if="type !== 'textarea'"
       :type="type"
       ref="input"
       :value="value"
@@ -13,9 +14,9 @@
       @change="onInputChange"
     />
     <textarea
+      v-if="type === 'textarea'"
       :id="id"
       :name="name"
-      v-if="type === 'textarea'"
       ref="input"
       :value="value"
       :placeholder="placeholder"
