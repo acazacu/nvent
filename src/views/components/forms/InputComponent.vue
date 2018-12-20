@@ -30,6 +30,7 @@
 </template>
 <style lang="scss">
 @import "src/styles/colors";
+@import "src/styles/typography";
 
 .field {
   display: flex;
@@ -51,15 +52,16 @@
   &-invalid {
     ul {
       list-style: none inside;
-      margin-top: 8px;
-      font-size: 12px;
-      color: red;
+      margin: 8px 0 0 0;
+      padding: 0;
+      color: $color-nok;
+      @include copy($scale0);
     }
 
     input,
     textarea {
-      border: 1px solid darkred;
-      background-color: lightpink;
+      border: 1px solid darken($color-nok, 10%);
+      background-color: lighten($color-nok, 25%);
     }
   }
 }
