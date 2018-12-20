@@ -1,0 +1,14 @@
+@import "./colors";
+
+.button {
+  background: $color-cta;
+  padding: 8px 16px;
+  border-radius: 2px;
+  color: $color-background;
+
+  &:hover {
+    cursor: pointer;
+    background: $color-cta-target;
+    box-shadow: 0 0 1px 1px $color-cta-target;
+  }
+}

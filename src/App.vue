@@ -10,34 +10,30 @@
 
 <style lang="scss">
 @import "./styles/normalise";
+@import "./styles/colors";
 @import "./styles/typography";
+@import "./styles/buttons";
 
 body {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
-
-  > header {
-    padding: 8px 16px;
-  }
+  background: $color-background;
 
   > main {
-    padding: 16px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     justify-content: space-between;
+    flex-grow: 1;
   }
 
   > footer {
-    padding: 8px 16px;
-
     .version {
-      font-size: 10px;
-      color: #666666;
+      margin-bottom: 0;
       cursor: default;
-      font-weight: normal;
+      text-align: center;
     }
   }
 }

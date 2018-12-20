@@ -1,24 +1,89 @@
-* {
-  font-size: 12px;
-  font-family: Roboto, sans-serif;
+@import "./colors";
 
-  @media screen and (min-width: 1024px) {
-    font-size: 14px;
+$root: (
+        font-size: 18px,
+        line-height: 27px
+);
+
+$scale0: (
+        font-size: 1rem,
+        line-height: 1.5rem,
+);
+
+$scale1: (
+        font-size: 1.5rem,
+        line-height: 1.5rem,
+);
+
+$scale2: (
+        font-size: 2.2777778rem,
+        line-height: 3rem,
+);
+
+$scale3: (
+        font-size: 3.3888889rem,
+        line-height: 4.5rem,
+);
+
+@mixin copy($scale) {
+  @each $property, $value in $scale {
+    #{$property}: $value;
   }
 }
 
-h1 {
-  font-size: 24px;
-
-  @media screen and (min-width: 1024px) {
-    font-size: 32px;
-  }
+html, .root {
+  @include copy($root);
+}
+body, .article {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  @include copy($scale0);
+}
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5 {
+  font-family: 'Roboto Slab', serif;
+}
+h1, .h1 {
+  font-weight: 400;
+  @include copy($scale3);
+}
+h2, .h2 {
+  font-weight: 400;
+  @include copy($scale2);
+}
+h3, .h3 {
+  font-weight: 400;
+  @include copy($scale1);
+}
+h4, .h4 {
+  font-weight: 300;
+  @include copy($scale0);
+}
+h5, .h5 {
+  font-weight: 300;
+  @include copy($scale0);
 }
 
-h2 {
-  font-size: 16px;
+input,
+textarea {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  @include copy($scale0);
+}
 
-  @media screen and (min-width: 1024px) {
-    font-size: 20px;
+body {
+  color: $color-copy;
+}
+
+a {
+  color: $color-cta;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover, &:active {
+    color: $color-cta-target;
   }
 }

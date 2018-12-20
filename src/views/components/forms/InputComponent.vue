@@ -29,6 +29,8 @@
   </div>
 </template>
 <style lang="scss">
+@import "src/styles/colors";
+
 .field {
   display: flex;
   flex-direction: column;
@@ -39,12 +41,11 @@
 
   input,
   textarea {
-    padding: 4px;
-    border: 1px solid lightgray;
+    border: 1px solid $color-limit;
   }
 
   textarea {
-    min-height: 200px;
+    min-height: 9rem;
   }
 
   &-invalid {
