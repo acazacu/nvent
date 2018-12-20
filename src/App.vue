@@ -1,6 +1,6 @@
 <template>
   <body>
-    <header><logo-component></logo-component></header>
+    <header-component></header-component>
     <main><router-view /></main>
     <footer>
       <p class="version">v.{{ version }} 🤯</p>
@@ -39,13 +39,13 @@ body {
 }
 </style>
 <script>
-import LogoComponent from "./views/components/LogoComponent.vue";
+import HeaderComponent from "./views/components/HeaderComponent.vue";
 import { mapState } from "vuex";
 
 export default {
   name: "App",
   components: {
-    "logo-component": LogoComponent
+    "header-component": HeaderComponent
   },
   computed: {
     ...mapState(["version"])

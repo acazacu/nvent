@@ -1,12 +1,12 @@
 import { shallowMount, createLocalVue } from "@vue/test-utils";
 
-import LogoComponent from "src/views/components/LogoComponent.vue";
+import HeaderComponent from "src/views/components/HeaderComponent.vue";
 
 const localVue = createLocalVue();
 
-describe("LogoComponent", () => {
+describe("HeaderComponent", () => {
   it("should create", () => {
-    const wrapper = shallowMount(LogoComponent, {
+    const wrapper = shallowMount(HeaderComponent, {
       localVue,
       stubs: ["router-link"]
     });

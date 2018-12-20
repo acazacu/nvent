@@ -1,16 +1,18 @@
 <template>
   <article>
-    <h2>Contact me</h2>
     <section data-rel="contact-form" v-if="!success">
       <p>
-        Leave your message here, together with your email so that I may get back to you if
-        necessary.
+        Send me a message via
+        <a target="_blank" href="https://www.linkedin.com/in/nvent-nl/" title="My Linkedin profile"
+          >linkedin <font-awesome-icon icon="external-link-alt"></font-awesome-icon
+        ></a>
+        or use the form below.
       </p>
       <form-component v-on:submit="submitForm" v-on:cancel="cancelContact">
         <input-email-component
           name="email"
           v-model="message.email"
-          placeholder="Email..."
+          placeholder="Your email..."
           @input="updateStore"
           required
         ></input-email-component>
