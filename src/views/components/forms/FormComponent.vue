@@ -27,6 +27,22 @@ form {
     justify-content: space-between;
     align-items: center;
     z-index: 1;
+
+    @media screen and (max-width: 480px) {
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: space-between;
+
+      > [data-rel="cancel-button"] {
+        align-self: center;
+        margin-top: 1rem;
+        order: 2;
+      }
+
+      > [data-rel="submit-button"] {
+        order: 1;
+      }
+    }
   }
 }
 </style>
