@@ -2,8 +2,8 @@
   <form ref="form" @submit.prevent="onSubmit">
     <div class="form-items"><slot></slot></div>
     <div class="form-controls">
-      <a data-rel="cancel-button" @click="onCancel" title="Cancel">Cancel</a>
-      <button data-rel="submit-button" type="submit">Send</button>
+      <a data-rel="cancel-button" @click="onCancel" title="Go back">Go back</a>
+      <button class="button button-primary" data-rel="submit-button" type="submit">Send</button>
     </div>
   </form>
 </template>
@@ -14,36 +14,33 @@ form {
   position: relative;
 
   .form-items > * {
-    margin: 8px 0;
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   .form-controls {
-    margin: 16px 0 8px 0;
+    margin-top: 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 1;
 
-    a {
-      color: blue;
+    @media screen and (max-width: 480px) {
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: space-between;
 
-      &:hover {
-        text-decoration: underline;
-        cursor: pointer;
+      > [data-rel="cancel-button"] {
+        align-self: center;
+        margin-top: 1rem;
+        order: 2;
       }
-    }
 
-    button[type="submit"] {
-      background: lightblue;
-      padding: 8px 16px;
-      border-radius: 2px;
-      color: darken(darkgrey, 35%);
-
-      &:hover {
-        cursor: pointer;
-        background: darken(lightblue, 15%);
-        color: darken(darkgrey, 50%);
-        box-shadow: 0 0 1px 1px darken(lightblue, 15%);
+      > [data-rel="submit-button"] {
+        order: 1;
       }
     }
   }

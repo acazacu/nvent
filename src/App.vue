@@ -1,6 +1,6 @@
 <template>
   <body>
-    <header><logo-component></logo-component></header>
+    <header-component></header-component>
     <main><router-view /></main>
     <footer>
       <p class="version">v.{{ version }} 🤯</p>
@@ -10,46 +10,42 @@
 
 <style lang="scss">
 @import "./styles/normalise";
+@import "./styles/colors";
 @import "./styles/typography";
+@import "./styles/buttons";
 
 body {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
-
-  > header {
-    padding: 8px 16px;
-  }
+  background: $color-offset-light;
 
   > main {
-    padding: 16px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     justify-content: space-between;
+    flex-grow: 1;
   }
 
   > footer {
-    padding: 8px 16px;
-
     .version {
-      font-size: 10px;
-      color: #666666;
+      margin-bottom: 0;
       cursor: default;
-      font-weight: normal;
+      text-align: center;
     }
   }
 }
 </style>
 <script>
-import LogoComponent from "./views/components/LogoComponent.vue";
+import HeaderComponent from "./views/components/HeaderComponent.vue";
 import { mapState } from "vuex";
 
 export default {
   name: "App",
   components: {
-    "logo-component": LogoComponent
+    "header-component": HeaderComponent
   },
   computed: {
     ...mapState(["version"])

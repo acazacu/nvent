@@ -1,16 +1,18 @@
 <template>
   <article>
     <section data-rel="contact-form" v-if="!success">
-      <h2>Contact me</h2>
       <p>
-        Leave your message here, together with your email so that I may get back to you if
-        necessary.
+        Send me a message via
+        <a target="_blank" href="https://www.linkedin.com/in/nvent-nl/" title="My Linkedin profile"
+          >linkedin <font-awesome-icon icon="external-link-alt"></font-awesome-icon
+        ></a>
+        or use the form below.
       </p>
       <form-component v-on:submit="submitForm" v-on:cancel="cancelContact">
         <input-email-component
           name="email"
           v-model="message.email"
-          placeholder="Email..."
+          placeholder="Your email..."
           @input="updateStore"
           required
         ></input-email-component>
@@ -38,19 +40,13 @@
   </article>
 </template>
 <style lang="scss">
-article {
-  margin: 8px;
-  color: #333;
-  max-width: 580px;
-
-  .load-mask {
-    position: absolute;
-    z-index: 2;
-    background-color: white;
-    opacity: 0.5;
-    width: 100%;
-    height: 100%;
-  }
+.load-mask {
+  position: absolute;
+  z-index: 2;
+  background-color: white;
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
 }
 </style>
 <script>
