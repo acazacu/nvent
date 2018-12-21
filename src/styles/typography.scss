@@ -45,6 +45,7 @@ h3, .h3,
 h4, .h4,
 h5, .h5 {
   font-family: 'Roboto Slab', serif;
+  color: $color-high-contrast-light;
 }
 h1, .h1 {
   font-weight: 400;
@@ -71,19 +72,20 @@ input,
 textarea {
   font-family: 'Raleway', sans-serif;
   font-weight: 400;
+  color: $color-reduced-contrast-light;
   @include copy($scale0);
 }
 
 body {
-  color: $color-copy;
+  color: $color-reduced-contrast-light;
 }
 
 a {
-  color: $color-cta;
+  color: $color-interactive;
   cursor: pointer;
   text-decoration: none;
 
   &:hover, &:active {
-    color: $color-cta-target;
+    color: $color-interactive2;
   }
 }

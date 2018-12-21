@@ -19,7 +19,7 @@ body {
   flex-direction: column;
   align-items: stretch;
   justify-content: space-between;
-  background: $color-background;
+  background: $color-offset-light;
 
   > main {
     display: flex;

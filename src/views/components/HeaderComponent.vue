@@ -12,12 +12,17 @@
   </header>
 </template>
 <style scoped lang="scss">
-@import "src/styles/colors";
-@import "src/styles/typography";
+@import "../../styles/colors";
+@import "../../styles/typography";
 
 header {
   display: flex;
   flex-direction: column;
+  background: $color-primary;
+
+  .logo {
+    color: $color-high-contrast-light;
+  }
 
   @media screen and (min-width: 480px) {
     flex-direction: row;
@@ -34,27 +39,32 @@ header {
     list-style: none inside;
     display: none;
     flex-grow: 1;
+    flex-direction: column;
+
+    li {
+      margin-bottom: 1rem;
+    }
 
     @media screen and (min-width: 480px) {
       margin-left: 1rem;
-      display: block;
+      display: flex;
+      flex-direction: row;
+
+      li {
+        margin-bottom: 0;
+        margin-left: 1rem;
+      }
     }
   }
 
   a {
-    color: $color-cta;
     @include copy($scale1);
 
-    &:hover {
-      color: $color-cta-target;
-      cursor: pointer;
-    }
-
     &.router-link-active {
-      color: $color-copy;
+      color: $color-reduced-contrast-light;
 
       &:hover {
-        color: $color-copy;
+        color: $color-reduced-contrast-light;
         cursor: default;
       }
     }
@@ -64,7 +74,7 @@ header {
     border: 0;
     padding: 0;
     background: transparent;
-    color: $color-copy;
+    color: $color-reduced-contrast-light;
     @include copy($scale1);
 
     @media screen and (min-width: 480px) {
@@ -79,7 +89,7 @@ header {
       bottom: 0;
       left: 0;
       right: 0;
-      background: $color-background;
+      background: $color-primary;
       z-index: 2;
     }
 

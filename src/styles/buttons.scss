@@ -2,15 +2,15 @@
 @import "./typography";
 
 .button {
-  background: $color-cta;
+  background: $color-interactive;
   padding: 0.5rem 1.5rem;
   border-radius: 2px;
-  color: $color-background;
+  color: $color-high-contrast-dark;
   font-weight: 500;
   @include copy($scale0);
 
   &:hover {
     cursor: pointer;
-    background: $color-cta-target;
+    background: $color-interactive2;
   }
 }

@@ -8,7 +8,12 @@ describe("HeaderComponent", () => {
   it("should create", () => {
     const wrapper = shallowMount(HeaderComponent, {
       localVue,
-      stubs: ["router-link"]
+      stubs: ["router-link", "font-awesome-icon"],
+      mocks: {
+        $router: {
+          afterEach: jest.fn()
+        }
+      }
     });
     expect(wrapper.isVueInstance()).toBeTruthy();
   });

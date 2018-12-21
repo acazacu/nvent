@@ -29,8 +29,8 @@
   </div>
 </template>
 <style lang="scss">
-@import "src/styles/colors";
-@import "src/styles/typography";
+@import "../../../styles/colors";
+@import "../../../styles/typography";
 
 .field {
   display: flex;
@@ -42,7 +42,7 @@
 
   input,
   textarea {
-    border: 1px solid $color-limit;
+    border: 1px solid $color-low-contrast-light;
   }
 
   textarea {
@@ -54,14 +54,13 @@
       list-style: none inside;
       margin: 8px 0 0 0;
       padding: 0;
-      color: $color-nok;
+      color: $color-negative;
       @include copy($scale0);
     }
 
     input,
     textarea {
-      border: 1px solid darken($color-nok, 10%);
-      background-color: lighten($color-nok, 25%);
+      border: 1px solid darken($color-negative, 10%);
     }
   }
 }
