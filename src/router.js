@@ -1,8 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
-import HomePage from "./views/HomePage.vue";
-import ContactPage from "./views/ContactPage";
-import ErrorPage from "./views/ErrorPage";
+import HomePage from "./components/HomePage.vue";
+import ContactPage from "./components/ContactPage";
+import ErrorPage from "./components/ErrorPage";
 
 Vue.use(Router);
 

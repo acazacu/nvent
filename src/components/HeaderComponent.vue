@@ -12,8 +12,8 @@
   </header>
 </template>
 <style scoped lang="scss">
-@import "../../styles/colors";
-@import "../../styles/typography";
+@import "../styles/colors";
+@import "../styles/typography";
 
 header {
   display: flex;

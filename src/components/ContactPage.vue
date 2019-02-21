@@ -51,10 +51,10 @@
 </style>
 <script>
 import { createNamespacedHelpers } from "vuex";
-import InputTextComponent from "./components/forms/InputTextComponent";
-import FormComponent from "./components/forms/FormComponent";
-import InputEmailComponent from "./components/forms/InputEmailComponent";
-import TextareaComponent from "./components/forms/TextareaComponent";
+import InputTextComponent from "./forms/InputTextComponent";
+import FormComponent from "./forms/FormComponent";
+import InputEmailComponent from "./forms/InputEmailComponent";
+import TextareaComponent from "./forms/TextareaComponent";
 
 const { mapActions, mapState, mapMutations } = createNamespacedHelpers("contact");
 

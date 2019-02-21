@@ -1,6 +1,6 @@
 import { shallowMount, createLocalVue } from "@vue/test-utils";
 
-import HeaderComponent from "src/views/components/HeaderComponent.vue";
+import HeaderComponent from "src/components/HeaderComponent.vue";
 
 const localVue = createLocalVue();
 

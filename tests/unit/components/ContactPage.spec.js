@@ -1,8 +1,8 @@
 import { createLocalVue, shallowMount } from "@vue/test-utils";
 import Vuex from "vuex";
 import flushPromises from "flush-promises";
-import ContactPage from "src/views/ContactPage.vue";
-import FormComponent from "src/views/components/forms/FormComponent.vue";
+import ContactPage from "src/components/ContactPage.vue";
+import FormComponent from "src/components/forms/FormComponent.vue";
 import mockContactState from "src/store/modules/contact.json";
 import contact from "src/store/modules/contact";
 

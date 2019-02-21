@@ -39,7 +39,7 @@ body {
 }
 </style>
 <script>
-import HeaderComponent from "./views/components/HeaderComponent.vue";
+import HeaderComponent from "./components/HeaderComponent.vue";
 import { mapState } from "vuex";
 
 export default {

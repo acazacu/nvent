@@ -1,14 +1,14 @@
 import { shallowMount, createLocalVue } from "@vue/test-utils";
 
-import InputEmailComponent from "src/views/components/forms/InputEmailComponent";
+import TextareaComponent from "src/components/forms/TextareaComponent";
 
 const localVue = createLocalVue();
 
-describe("InputEmailComponent", () => {
+describe("TextareaComponent", () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallowMount(InputEmailComponent, {
+    wrapper = shallowMount(TextareaComponent, {
       localVue,
       propsData: {
         name: "test",
@@ -21,17 +21,18 @@ describe("InputEmailComponent", () => {
     });
   });
 
-  it("should create", () => {
+  it("should creates", () => {
     expect(wrapper.isVueInstance()).toBeTruthy();
   });
 
-  it("should render an input of type email", () => {
-    expect(wrapper.find("input").attributes().type).toBe("email");
+  it("should render a textarea", () => {
+    expect(wrapper.find("textarea").exists()).toBeTruthy();
   });
 
-  it("should validate against incorrect email addresses", () => {
+  it("should validate against values with a character count lower than the minimum set", () => {
     wrapper.setProps({
-      value: "sdfsafas"
+      value: "hi",
+      minimumCharacters: 3
     });
 
     wrapper.vm.validate();
@@ -39,9 +40,10 @@ describe("InputEmailComponent", () => {
     expect(wrapper.vm.isValid).toBeFalsy();
   });
 
-  it("should validate a correct email value", () => {
+  it("should validate a value with a character count lower than the minimum set", () => {
     wrapper.setProps({
-      value: "john.doe@example.com"
+      value: "hi nvent",
+      minimumCharacters: 3
     });
 
     wrapper.vm.validate();

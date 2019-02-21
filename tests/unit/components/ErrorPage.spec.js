@@ -1,6 +1,6 @@
 import { shallowMount, createLocalVue, RouterLinkStub } from "@vue/test-utils";
 
-import ErrorPage from "src/views/ErrorPage";
+import ErrorPage from "src/components/ErrorPage";
 
 const localVue = createLocalVue();
 

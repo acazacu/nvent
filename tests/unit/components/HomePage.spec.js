@@ -1,6 +1,6 @@
 import { createLocalVue, shallowMount, RouterLinkStub } from "@vue/test-utils";
 
-import HomePage from "src/views/HomePage";
+import HomePage from "src/components/HomePage";
 
 const localVue = createLocalVue();
 

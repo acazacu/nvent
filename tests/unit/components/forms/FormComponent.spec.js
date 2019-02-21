@@ -1,6 +1,6 @@
 import { shallowMount, createLocalVue } from "@vue/test-utils";
 
-import FormComponent from "src/views/components/forms/FormComponent";
+import FormComponent from "src/components/forms/FormComponent";
 import Vue from "vue";
 
 const localVue = createLocalVue();

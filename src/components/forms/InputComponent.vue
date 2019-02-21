@@ -29,8 +29,8 @@
   </div>
 </template>
 <style lang="scss">
-@import "../../../styles/colors";
-@import "../../../styles/typography";
+@import "../../styles/colors";
+@import "../../styles/typography";
 
 .field {
   display: flex;
